@@ -251,6 +251,23 @@
       color: #fde68a;
     }
 
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      font-size: 0.46em;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(30, 41, 59, 0.72);
+      padding: 6px 10px;
+      color: #dbeafe;
+    }
+
     .badge {
       display: inline-block;
       border-radius: 999px;
@@ -616,6 +633,148 @@
             </ul>
           </div>
         </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-chart-pie"></i> Soporte Odoo SATI · KPIs Ejecutivos</h2>
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="value">37</div>
+            <div class="label">Tickets totales</div>
+          </div>
+          <div class="kpi">
+            <div class="value">~26 días</div>
+            <div class="label">Promedio de resolución</div>
+          </div>
+          <div class="kpi">
+            <div class="value">~40%</div>
+            <div class="label">Tickets críticos</div>
+          </div>
+          <div class="kpi">
+            <div class="value">~100 días</div>
+            <div class="label">Caso más largo</div>
+          </div>
+        </div>
+        <div class="pill-row">
+          <span class="pill">Recurrentes: Facturación electrónica, XML/SIFEN, permisos, series.</span>
+          <span class="pill">Abiertos críticos recientes: #7223, #7207, #6864.</span>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-hourglass-half"></i> Duración de Tickets (SATI)</h2>
+        <div class="chart">
+          <div class="bar-row">
+            <span>0–7 días</span>
+            <div class="bar-track"><div class="bar-fill good" style="width: 22%"></div></div>
+            <span>22%</span>
+          </div>
+          <div class="bar-row">
+            <span>8–30 días</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 41%"></div></div>
+            <span>41%</span>
+          </div>
+          <div class="bar-row">
+            <span>+30 días</span>
+            <div class="bar-track"><div class="bar-fill warn" style="width: 37%"></div></div>
+            <span>37%</span>
+          </div>
+        </div>
+        <div class="note-box">
+          Señal de alerta: una proporción alta supera 30 días, elevando riesgo operativo y fiscal en procesos de facturación.
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Distribución por Tipo y Criticidad</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Por tipo de ticket</h3>
+            <div class="chart">
+              <div class="bar-row">
+                <span>Error</span>
+                <div class="bar-track"><div class="bar-fill warn" style="width: 73%"></div></div>
+                <span>73%</span>
+              </div>
+              <div class="bar-row">
+                <span>Mejora / Consulta</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 19%"></div></div>
+                <span>19%</span>
+              </div>
+              <div class="bar-row">
+                <span>Estratégico / Seguimiento</span>
+                <div class="bar-track"><div class="bar-fill good" style="width: 8%"></div></div>
+                <span>8%</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Por criticidad</h3>
+            <div class="chart">
+              <div class="bar-row">
+                <span>Crítica</span>
+                <div class="bar-track"><div class="bar-fill warn" style="width: 40%"></div></div>
+                <span>40%</span>
+              </div>
+              <div class="bar-row">
+                <span>Alta</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 33%"></div></div>
+                <span>33%</span>
+              </div>
+              <div class="bar-row">
+                <span>Media / Baja</span>
+                <div class="bar-track"><div class="bar-fill good" style="width: 27%"></div></div>
+                <span>27%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-triangle-exclamation"></i> Conclusiones Ejecutivas SATI</h2>
+        <div class="card">
+          <ul>
+            <li><strong>Insight clave:</strong> el ERP es crítico, pero hoy la empresa no tiene control técnico suficiente.</li>
+            <li><strong>Patrón observado:</strong> alta recurrencia en temas fiscales/operativos (XML, SIFEN, permisos, series).</li>
+            <li><strong>Impacto:</strong> riesgo operativo, fiscal, financiero y estratégico por demoras y dependencia total.</li>
+            <li><strong>Conclusión:</strong> alta dependencia + ausencia de SLA formal = riesgo alto de negocio.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-route"></i> Plan de Acción Soporte Odoo (90 días)</h2>
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th>Frente</th>
+              <th>Acción</th>
+              <th>Plazo</th>
+              <th>Resultado esperado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gobernanza</td>
+              <td>SLA formal SATI con tiempos por criticidad y escalamiento.</td>
+              <td>30 días</td>
+              <td>Reducción de incertidumbre y trazabilidad de compromisos.</td>
+            </tr>
+            <tr>
+              <td>Control técnico</td>
+              <td>Acceso técnico + auditoría de customizaciones y versionado.</td>
+              <td>45 días</td>
+              <td>Menor dependencia y mejor calidad de cambios.</td>
+            </tr>
+            <tr>
+              <td>Gestión operativa</td>
+              <td>Dashboard IT con filtro de tickets críticos y aging.</td>
+              <td>60 días</td>
+              <td>Seguimiento ejecutivo semanal orientado a riesgo.</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
 
       <section>
