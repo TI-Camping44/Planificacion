@@ -34,12 +34,6 @@
       text-align: left;
     }
 
-    .reveal .slides section.present {
-      overflow-y: auto;
-      max-height: 100%;
-      padding-right: 10px;
-    }
-
     .reveal h1,
     .reveal h2,
     .reveal h3 {
@@ -49,9 +43,9 @@
       color: #f8fafc;
     }
 
-    .reveal h1 { font-size: 2.1em; }
-    .reveal h2 { font-size: 1.45em; }
-    .reveal h3 { font-size: 1.05em; color: var(--accent); }
+    .reveal h1 { font-size: 1.65em; }
+    .reveal h2 { font-size: 1.05em; }
+    .reveal h3 { font-size: 0.78em; color: var(--accent); }
 
     .subtitle {
       color: var(--muted);
@@ -99,8 +93,8 @@
 
     .reveal ul {
       margin: 0.2em 0 0.1em 1em;
-      font-size: 0.7em;
-      line-height: 1.36;
+      font-size: 0.52em;
+      line-height: 1.28;
     }
 
     .reveal li { margin: 0.22em 0; }
@@ -186,11 +180,111 @@
       color: #8ea2bc;
     }
 
+    .section-title {
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+      margin-bottom: 14px;
+    }
+
+    .compact-cards .card {
+      padding: 12px 13px;
+    }
+
+    .compact-cards .card h3 {
+      font-size: 0.72em;
+      margin-bottom: 0.25em;
+    }
+
+    .compact-cards ul {
+      font-size: 0.47em;
+      line-height: 1.2;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .status-item {
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: rgba(9, 18, 32, 0.8);
+      font-size: 0.58em;
+    }
+
+    .status-item strong {
+      display: inline-block;
+      margin-bottom: 6px;
+      font-size: 1.05em;
+    }
+
+    .risk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.52em;
+    }
+
+    .risk-table th,
+    .risk-table td {
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      padding: 9px 10px;
+      vertical-align: top;
+    }
+
+    .risk-table th {
+      background: rgba(56, 189, 248, 0.14);
+      color: #e2e8f0;
+      text-align: left;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 0.9em;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .badge.high { background: rgba(248, 113, 113, 0.2); color: #fecaca; }
+    .badge.medium { background: rgba(251, 191, 36, 0.2); color: #fde68a; }
+    .badge.low { background: rgba(52, 211, 153, 0.2); color: #a7f3d0; }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .time-col {
+      background: rgba(8, 18, 33, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-top: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .time-col h3 {
+      margin-bottom: 6px;
+      color: #93c5fd;
+      font-size: 0.75em;
+    }
+
+    .time-col ul {
+      font-size: 0.49em;
+      line-height: 1.24;
+    }
+
     @media (max-width: 1200px) {
-      .reveal h1 { font-size: 1.7em; }
-      .reveal h2 { font-size: 1.2em; }
-      .reveal h3 { font-size: 0.9em; }
-      .reveal ul { font-size: 0.62em; }
+      .reveal h1 { font-size: 1.5em; }
+      .reveal h2 { font-size: 0.95em; }
+      .reveal h3 { font-size: 0.72em; }
+      .reveal ul { font-size: 0.5em; }
       .card { padding: 14px 15px; }
     }
 
@@ -198,20 +292,23 @@
       .grid-2 { grid-template-columns: 1fr; }
       .kpi-row { grid-template-columns: 1fr; }
       .bar-row { grid-template-columns: 120px 1fr 50px; }
-      .reveal h1 { font-size: 1.4em; }
-      .reveal h2 { font-size: 1.05em; }
-      .reveal h3 { font-size: 0.82em; }
-      .reveal ul { font-size: 0.56em; }
+      .reveal h1 { font-size: 1.25em; }
+      .reveal h2 { font-size: 0.84em; }
+      .reveal h3 { font-size: 0.68em; }
+      .reveal ul { font-size: 0.46em; }
       .subtitle { font-size: 0.62em; }
       .meta { font-size: 0.55em; }
+      .timeline,
+      .status-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-height: 760px) {
-      .reveal h1 { font-size: 1.35em; }
-      .reveal h2 { font-size: 1em; }
-      .reveal h3 { font-size: 0.8em; }
-      .reveal ul { font-size: 0.52em; line-height: 1.28; }
-      .card { padding: 12px; }
+      .reveal h1 { font-size: 1.15em; }
+      .reveal h2 { font-size: 0.78em; }
+      .reveal h3 { font-size: 0.64em; }
+      .reveal ul { font-size: 0.44em; line-height: 1.2; }
+      .card { padding: 10px 11px; }
+      .kpi .label { font-size: 0.45em; }
     }
   </style>
 </head>
@@ -228,7 +325,7 @@
       </section>
 
       <section>
-        <h2><i class="fa-solid fa-gauge-high"></i> Estado General del Área IT</h2>
+        <h2 class="section-title"><i class="fa-solid fa-gauge-high"></i> Estado General del Área IT</h2>
         <div class="grid-2">
           <div class="card">
             <h3>Infraestructura</h3>
@@ -249,8 +346,8 @@
         </div>
       </section>
 
-      <section>
-        <h2><i class="fa-solid fa-list-check"></i> Gestión del Mes: Logros y Actividades</h2>
+      <section class="compact-cards">
+        <h2 class="section-title"><i class="fa-solid fa-list-check"></i> Gestión del Mes: Logros y Actividades</h2>
         <div class="grid-2">
           <div class="card">
             <h3>Infraestructura</h3>
@@ -288,7 +385,7 @@
       </section>
 
       <section>
-        <h2><i class="fa-solid fa-triangle-exclamation"></i> Problemas Detectados</h2>
+        <h2 class="section-title"><i class="fa-solid fa-triangle-exclamation"></i> Problemas Detectados</h2>
         <div class="card">
           <ul>
             <li><span class="risk">Dependencia de proveedores externos</span> para tareas críticas.</li>
@@ -301,7 +398,7 @@
       </section>
 
       <section>
-        <h2><i class="fa-solid fa-shield-halved"></i> Riesgos Operativos</h2>
+        <h2 class="section-title"><i class="fa-solid fa-shield-halved"></i> Riesgos Operativos</h2>
         <div class="grid-2">
           <div class="card">
             <h3>Continuidad</h3>
@@ -322,7 +419,7 @@
       </section>
 
       <section>
-        <h2><i class="fa-solid fa-network-wired"></i> Plan Estratégico: Infraestructura</h2>
+        <h2 class="section-title"><i class="fa-solid fa-network-wired"></i> Plan Estratégico: Infraestructura</h2>
         <div class="card">
           <ul>
             <li>Ordenamiento de red: cableado, rack y etiquetado estándar.</li>
@@ -334,7 +431,7 @@
       </section>
 
       <section>
-        <h2><i class="fa-solid fa-user-lock"></i> Plan Estratégico: Seguridad</h2>
+        <h2 class="section-title"><i class="fa-solid fa-user-lock"></i> Plan Estratégico: Seguridad</h2>
         <div class="card">
           <ul>
             <li>Política corporativa de contraseñas robustas.</li>
@@ -346,7 +443,7 @@
       </section>
 
       <section>
-        <h2><i class="fa-solid fa-gears"></i> Plan Estratégico: Sistemas (Odoo / Workspace)</h2>
+        <h2 class="section-title"><i class="fa-solid fa-gears"></i> Plan Estratégico: Sistemas (Odoo / Workspace)</h2>
         <div class="card">
           <ul>
             <li>Roadmap trimestral con <strong>SATI</strong> para Odoo ERP.</li>
@@ -358,7 +455,7 @@
       </section>
 
       <section>
-        <h2><i class="fa-solid fa-headset"></i> Plan Estratégico: Soporte IT</h2>
+        <h2 class="section-title"><i class="fa-solid fa-headset"></i> Plan Estratégico: Soporte IT</h2>
         <div class="card">
           <ul>
             <li>Definición de SLA por criticidad de incidencia.</li>
@@ -370,7 +467,7 @@
       </section>
 
       <section>
-        <h2><i class="fa-solid fa-boxes-stacked"></i> Plan Estratégico: Inventario y Control</h2>
+        <h2 class="section-title"><i class="fa-solid fa-boxes-stacked"></i> Plan Estratégico: Inventario y Control</h2>
         <div class="card">
           <ul>
             <li>Inventario completo de activos IT y celulares corporativos.</li>
@@ -382,7 +479,7 @@
       </section>
 
       <section>
-        <h2><i class="fa-solid fa-chart-column"></i> Indicadores de Gestión (referenciales)</h2>
+        <h2 class="section-title"><i class="fa-solid fa-chart-column"></i> Indicadores de Gestión (referenciales)</h2>
 
         <div class="kpi-row">
           <div class="kpi">
@@ -421,7 +518,124 @@
       </section>
 
       <section>
-        <h2><i class="fa-solid fa-flag-checkered"></i> Cierre y Dirección Estratégica</h2>
+        <h2 class="section-title"><i class="fa-solid fa-chart-line"></i> KPIs Ejecutivos del Mes</h2>
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="value">67</div>
+            <div class="label">Incidencias resueltas</div>
+          </div>
+          <div class="kpi">
+            <div class="value">8.2 h</div>
+            <div class="label">Promedio de resolución</div>
+          </div>
+          <div class="kpi">
+            <div class="value">OK / Riesgo</div>
+            <div class="label">Estado de backups</div>
+          </div>
+        </div>
+        <div class="chart">
+          <div class="bar-row">
+            <span>Backups verificados</span>
+            <div class="bar-track"><div class="bar-fill good" style="width: 90%"></div></div>
+            <span>90%</span>
+          </div>
+          <div class="bar-row">
+            <span>Avance Odoo</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 72%"></div></div>
+            <span>72%</span>
+          </div>
+          <div class="bar-row">
+            <span>SLA cumplido</span>
+            <div class="bar-track"><div class="bar-fill warn" style="width: 81%"></div></div>
+            <span>81%</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-bolt"></i> Matriz de Riesgos Operativos</h2>
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th>Riesgo</th>
+              <th>Impacto</th>
+              <th>Acción en curso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dependencia de proveedores externos</td>
+              <td><span class="badge high">ALTO</span></td>
+              <td>Mitigación en proceso: definición de contingencias internas y documentación técnica.</td>
+            </tr>
+            <tr>
+              <td>Caídas de sistemas críticos</td>
+              <td><span class="badge high">ALTO</span></td>
+              <td>Monitoreo en implementación y protocolo de respuesta prioritaria.</td>
+            </tr>
+            <tr>
+              <td>Seguridad (phishing / accesos indebidos)</td>
+              <td><span class="badge medium">MEDIO</span></td>
+              <td>Capacitación pendiente + fortalecimiento de controles de acceso.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-traffic-light"></i> Estado del Área IT (Semáforo)</h2>
+        <div class="status-grid">
+          <div class="status-item">
+            <strong>Infraestructura: 🟡</strong><br>
+            Red operativa con mejoras pendientes en ordenamiento físico y monitoreo continuo.
+          </div>
+          <div class="status-item">
+            <strong>Seguridad: 🔴</strong><br>
+            Requiere acelerar 2FA, políticas formales y capacitación anti-phishing.
+          </div>
+          <div class="status-item">
+            <strong>Sistemas: 🟢</strong><br>
+            Odoo y Workspace estables, con roadmap de optimización en ejecución.
+          </div>
+          <div class="status-item">
+            <strong>Soporte: 🟡</strong><br>
+            Buen nivel operativo, con oportunidad de mejora vía SLA y base de conocimiento.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-road"></i> Roadmap Trimestral IT</h2>
+        <div class="timeline">
+          <div class="time-col">
+            <h3>Q2 · Estabilización</h3>
+            <ul>
+              <li>Ordenamiento de red y etiquetado físico.</li>
+              <li>Inventario completo de activos y celulares.</li>
+              <li>Definición inicial de SLA de soporte.</li>
+            </ul>
+          </div>
+          <div class="time-col">
+            <h3>Q3 · Control y Seguridad</h3>
+            <ul>
+              <li>Implementación de 2FA en cuentas críticas.</li>
+              <li>Auditoría de accesos y permisos por área.</li>
+              <li>Base de conocimiento y estandarización de tickets.</li>
+            </ul>
+          </div>
+          <div class="time-col">
+            <h3>Q4 · Optimización y Escalabilidad</h3>
+            <ul>
+              <li>Roadmap avanzado Odoo con SATI.</li>
+              <li>Validación periódica de backups y pruebas de recuperación.</li>
+              <li>Plan de renovación de equipos obsoletos.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-flag-checkered"></i> Cierre y Dirección Estratégica</h2>
         <div class="card">
           <ul>
             <li>Transición del modelo <strong>reactivo</strong> a uno <strong>preventivo y estratégico</strong>.</li>
@@ -431,6 +645,28 @@
           </ul>
         </div>
         <p class="footer-note">Presentación IT • Camping 44 S.A.</p>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> Mensaje Final: Evolución del Área IT</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Evolución de gestión</h3>
+            <ul>
+              <li>IT consolida una visión de servicio con foco en negocio.</li>
+              <li>Se fortalecen procesos, métricas y control operativo.</li>
+              <li>Se reduce dependencia de reacción ante urgencias.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Dirección estratégica</h3>
+            <ul>
+              <li>Paso sostenido de modelo reactivo a preventivo.</li>
+              <li>Prioridad en seguridad, control y eficiencia operativa.</li>
+              <li>Alineación de IT con el crecimiento de Camping 44 S.A.</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
     </div>
