@@ -34,6 +34,12 @@
       text-align: left;
     }
 
+    .reveal .slides section.present {
+      overflow-y: auto;
+      max-height: 100%;
+      padding-right: 10px;
+    }
+
     .reveal h1,
     .reveal h2,
     .reveal h3 {
@@ -93,7 +99,7 @@
 
     .reveal ul {
       margin: 0.2em 0 0.1em 1em;
-      font-size: 0.74em;
+      font-size: 0.7em;
       line-height: 1.36;
     }
 
@@ -180,10 +186,32 @@
       color: #8ea2bc;
     }
 
+    @media (max-width: 1200px) {
+      .reveal h1 { font-size: 1.7em; }
+      .reveal h2 { font-size: 1.2em; }
+      .reveal h3 { font-size: 0.9em; }
+      .reveal ul { font-size: 0.62em; }
+      .card { padding: 14px 15px; }
+    }
+
     @media (max-width: 900px) {
       .grid-2 { grid-template-columns: 1fr; }
       .kpi-row { grid-template-columns: 1fr; }
       .bar-row { grid-template-columns: 120px 1fr 50px; }
+      .reveal h1 { font-size: 1.4em; }
+      .reveal h2 { font-size: 1.05em; }
+      .reveal h3 { font-size: 0.82em; }
+      .reveal ul { font-size: 0.56em; }
+      .subtitle { font-size: 0.62em; }
+      .meta { font-size: 0.55em; }
+    }
+
+    @media (max-height: 760px) {
+      .reveal h1 { font-size: 1.35em; }
+      .reveal h2 { font-size: 1em; }
+      .reveal h3 { font-size: 0.8em; }
+      .reveal ul { font-size: 0.52em; line-height: 1.28; }
+      .card { padding: 12px; }
     }
   </style>
 </head>
@@ -418,9 +446,9 @@
       controls: true,
       progress: true,
       center: true,
-      width: 1280,
-      height: 720,
-      margin: 0.04
+      margin: 0.02,
+      minScale: 0.2,
+      maxScale: 1.5
     });
   </script>
 </body>
