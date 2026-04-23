@@ -113,7 +113,7 @@
 
     .kpi-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 14px;
       margin-top: 20px;
     }
@@ -494,6 +494,10 @@
             <div class="value">92%</div>
             <div class="label">Backups ejecutados</div>
           </div>
+          <div class="kpi">
+            <div class="value">81%</div>
+            <div class="label">Cumplimiento SLA</div>
+          </div>
         </div>
 
         <div class="chart">
@@ -519,35 +523,65 @@
 
       <section>
         <h2 class="section-title"><i class="fa-solid fa-chart-line"></i> KPIs Ejecutivos del Mes</h2>
+        <p class="subtitle">Corte operativo: 23/04/2026 (fuente: planilla de tareas IT compartida).</p>
         <div class="kpi-row">
           <div class="kpi">
-            <div class="value">67</div>
-            <div class="label">Incidencias resueltas</div>
+            <div class="value">24</div>
+            <div class="label">Tareas finalizadas</div>
           </div>
           <div class="kpi">
-            <div class="value">8.2 h</div>
-            <div class="label">Promedio de resolución</div>
+            <div class="value">10</div>
+            <div class="label">Tareas bloqueadas</div>
           </div>
           <div class="kpi">
-            <div class="value">OK / Riesgo</div>
+            <div class="value">38,08%</div>
+            <div class="label">Avance Odoo ERP</div>
+          </div>
+          <div class="kpi">
+            <div class="value">Riesgo</div>
             <div class="label">Estado de backups</div>
           </div>
         </div>
         <div class="chart">
           <div class="bar-row">
-            <span>Backups verificados</span>
-            <div class="bar-track"><div class="bar-fill good" style="width: 90%"></div></div>
-            <span>90%</span>
+            <span>Finalizadas</span>
+            <div class="bar-track"><div class="bar-fill good" style="width: 69%"></div></div>
+            <span>69%</span>
           </div>
           <div class="bar-row">
-            <span>Avance Odoo</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 72%"></div></div>
-            <span>72%</span>
+            <span>En proceso</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 20%"></div></div>
+            <span>20%</span>
           </div>
           <div class="bar-row">
-            <span>SLA cumplido</span>
-            <div class="bar-track"><div class="bar-fill warn" style="width: 81%"></div></div>
-            <span>81%</span>
+            <span>Bloqueadas/Pendientes</span>
+            <div class="bar-track"><div class="bar-fill warn" style="width: 31%"></div></div>
+            <span>31%</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-table-list"></i> Portafolio IT (Resumen de la planilla)</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Distribución de estado</h3>
+            <ul>
+              <li>✅ Finalizado: 24 iniciativas.</li>
+              <li>🟡 En proceso: 7 iniciativas.</li>
+              <li>🟠 Bloqueado: 10 iniciativas.</li>
+              <li>🔴 Pendiente: 4 iniciativas.</li>
+              <li>❌ Cancelado: 1 iniciativa.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Hallazgos clave</h3>
+            <ul>
+              <li>Dependencia de terceros impacta tiempos en temas críticos de Odoo.</li>
+              <li>Existen iniciativas con “100%” pero aún en estado bloqueado/pending (inconsistencia de seguimiento).</li>
+              <li>Hay fechas vencidas con días negativos que requieren replanteo de calendario.</li>
+              <li>Conviene homologar criterio: estado, avance y fecha compromiso.</li>
+            </ul>
           </div>
         </div>
       </section>
