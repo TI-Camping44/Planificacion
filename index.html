@@ -149,10 +149,10 @@
 
     .bar-row {
       display: grid;
-      grid-template-columns: 210px 1fr 60px;
+      grid-template-columns: 240px 1fr 60px;
       gap: 10px;
       align-items: center;
-      font-size: 0.6em;
+      font-size: 0.56em;
     }
 
     .bar-row > span:first-child {
@@ -336,7 +336,7 @@
     @media (max-width: 900px) {
       .grid-2 { grid-template-columns: 1fr; }
       .kpi-row { grid-template-columns: 1fr; }
-      .bar-row { grid-template-columns: 145px 1fr 50px; }
+      .bar-row { grid-template-columns: 165px 1fr 50px; }
       .reveal h1 { font-size: 1.25em; }
       .reveal h2 { font-size: 0.84em; }
       .reveal h3 { font-size: 0.68em; }
@@ -387,6 +387,44 @@
               <li><span class="highlight">Odoo ERP</span>: soporte funcional y continuidad.</li>
               <li><span class="highlight">Google Workspace</span>: cuentas, acceso y colaboración.</li>
               <li>Atención integral a usuarios y celulares corporativos.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-id-card-clip"></i> Licencias y Usuarios (Control IT)</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Antivirus corporativo</h3>
+            <ul>
+              <li>Licencias activas: <strong>[completar]</strong></li>
+              <li>Licencias disponibles: <strong>[completar]</strong></li>
+              <li>Vencimiento próximo: <strong>[completar]</strong></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Google Workspace</h3>
+            <ul>
+              <li>Usuarios activos: <strong>[completar]</strong></li>
+              <li>Licencias por tipo (Business/Enterprise): <strong>[completar]</strong></li>
+              <li>Cuentas sin uso / revisión: <strong>[completar]</strong></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Usuarios Odoo</h3>
+            <ul>
+              <li>Usuarios activos: <strong>[completar]</strong></li>
+              <li>Usuarios administrativos: <strong>[completar]</strong></li>
+              <li>Perfiles a depurar: <strong>[completar]</strong></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Usuarios HANSA</h3>
+            <ul>
+              <li>Usuarios activos: <strong>[completar]</strong></li>
+              <li>Usuarios bloqueados/inactivos: <strong>[completar]</strong></li>
+              <li>Estado de reorganización: <strong>En curso</strong></li>
             </ul>
           </div>
         </div>
@@ -570,41 +608,43 @@
       <section>
         <h2 class="section-title"><i class="fa-solid fa-chart-line"></i> KPIs Ejecutivos del Mes</h2>
         <p class="subtitle">Corte operativo: 23/04/2026 (fuente: planilla de tareas IT compartida).</p>
+        <p class="subtitle">Lectura: estado general del portafolio IT (no solo tickets SATI).</p>
         <div class="kpi-row">
           <div class="kpi">
             <div class="value">24</div>
-            <div class="label">Tareas finalizadas</div>
+            <div class="label">Finalizadas</div>
           </div>
           <div class="kpi">
             <div class="value">10</div>
-            <div class="label">Tareas bloqueadas</div>
+            <div class="label">Bloqueadas</div>
           </div>
           <div class="kpi">
             <div class="value">38,08%</div>
-            <div class="label">Avance Odoo ERP</div>
+            <div class="label">Avance Odoo ERP (SATI)</div>
           </div>
           <div class="kpi">
             <div class="value">Riesgo</div>
-            <div class="label">Estado de backups</div>
+            <div class="label">Backups (validación pendiente)</div>
           </div>
         </div>
         <div class="chart">
           <div class="bar-row">
             <span>Finalizadas</span>
-            <div class="bar-track"><div class="bar-fill good" style="width: 69%"></div></div>
-            <span>69%</span>
+            <div class="bar-track"><div class="bar-fill good" style="width: 52%"></div></div>
+            <span>52%</span>
           </div>
           <div class="bar-row">
             <span>En proceso</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 20%"></div></div>
-            <span>20%</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 15%"></div></div>
+            <span>15%</span>
           </div>
           <div class="bar-row">
-            <span>Bloqueadas/Pendientes</span>
-            <div class="bar-track"><div class="bar-fill warn" style="width: 31%"></div></div>
-            <span>31%</span>
+            <span>Bloq. + Pend.</span>
+            <div class="bar-track"><div class="bar-fill warn" style="width: 33%"></div></div>
+            <span>33%</span>
           </div>
         </div>
+        <p class="subtitle">*Distribución del portafolio activo; valores redondeados.</p>
       </section>
 
       <section>
