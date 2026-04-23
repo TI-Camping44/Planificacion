@@ -410,24 +410,111 @@
       .card { padding: 10px 11px; }
       .kpi .label { font-size: 0.45em; }
     }
+
+    .mode-card.enhanced {
+  padding: 36px;
+  background: linear-gradient(145deg, rgba(10,18,30,0.95), rgba(15,30,50,0.85));
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.mode-header h1 {
+  font-size: 2.2em;
+  margin: 10px 0 6px 0;
+}
+
+.meta-row {
+  display: flex;
+  gap: 20px;
+  font-size: 0.65em;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+.mode-btn {
+  transition: all 0.25s ease;
+}
+
+.mode-btn.primary {
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  background: linear-gradient(145deg, rgba(52,211,153,0.15), rgba(16,185,129,0.08));
+}
+
+.mode-btn.secondary {
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  background: linear-gradient(145deg, rgba(56,189,248,0.15), rgba(59,130,246,0.08));
+}
+
+.mode-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+.mode-title {
+  font-size: 1.05em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.mode-desc {
+  font-size: 0.85em;
+  color: var(--muted);
+}
+
+.mode-footer {
+  margin-top: 18px;
+  font-size: 0.6em;
+  color: #93c5fd;
+  opacity: 0.8;
+}
   </style>
 </head>
 <body>
   <div id="modeSelector" class="mode-selector">
-    <div class="mode-card">
-      <h1 style="margin:0 0 6px 0;">Reporte de Gestión IT</h1>
-      <p class="subtitle" style="margin:0;">Camping 44 S.A. · Seleccionar modo de presentación</p>
-      <div class="mode-actions">
-        <button class="mode-btn" onclick="selectMode('resumen')">
-          <strong>Modo Resumen (Recomendado)</strong>
-          12-15 minutos · versión ejecutiva para comité.
-        </button>
-        <button class="mode-btn" onclick="selectMode('full')">
-          <strong>Modo Full</strong>
-          Contenido completo con detalle ampliado.
-        </button>
-      </div>
+  <div class="mode-card enhanced">
+  <div class="mode-header">
+    <span class="brand-chip">
+      <i class="fa-solid fa-campground"></i> Camping 44 S.A.
+    </span>
+
+    <h1>Reporte de Gestión IT</h1>
+
+    <p class="subtitle">
+      Estado operativo, riesgos y plan estratégico del área IT
+    </p>
+
+    <div class="meta-row">
+      <span><i class="fa-regular fa-calendar"></i> Abril 2026</span>
+      <span><i class="fa-solid fa-user-gear"></i> Área IT (1 responsable)</span>
     </div>
+  </div>
+
+  <div class="mode-actions">
+    <button class="mode-btn primary" onclick="selectMode('resumen')">
+      <div class="mode-title">
+        <i class="fa-solid fa-bolt"></i>
+        Modo Ejecutivo
+      </div>
+      <div class="mode-desc">
+        12–15 min · foco en decisiones y riesgos críticos
+      </div>
+    </button>
+
+    <button class="mode-btn secondary" onclick="selectMode('full')">
+      <div class="mode-title">
+        <i class="fa-solid fa-layer-group"></i>
+        Modo Detallado
+      </div>
+      <div class="mode-desc">
+        Análisis completo con métricas, tickets y plan técnico
+      </div>
+    </button>
+  </div>
+
+  <div class="mode-footer">
+    <i class="fa-solid fa-circle-info"></i>
+    Seleccionar según tiempo disponible del comité
+  </div>
+</div>
   </div>
 
   <button id="backBtn" class="back-btn" style="display:none;" onclick="goBackToSelector()"><i class="fa-solid fa-arrow-left"></i> Volver</button>
