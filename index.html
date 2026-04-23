@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte de Gestión IT - Camping 44 S.A.</title>
+
+  <!-- Reveal.js core + theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-primary: #0b1320;
+      --bg-secondary: #111c2e;
+      --accent: #38bdf8;
+      --accent-2: #34d399;
+      --text: #e5e7eb;
+      --muted: #93a3b8;
+      --danger: #f87171;
+      --warn: #fbbf24;
+    }
+
+    .reveal {
+      font-family: "Inter", "Segoe UI", "Roboto", Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top right, #1d2d49 0%, var(--bg-primary) 45%, #05080f 100%);
+    }
+
+    .reveal .slides section {
+      text-align: left;
+    }
+
+    .reveal h1,
+    .reveal h2,
+    .reveal h3 {
+      text-transform: none;
+      letter-spacing: 0.2px;
+      margin-bottom: 0.4em;
+      color: #f8fafc;
+    }
+
+    .reveal h1 { font-size: 1.65em; }
+    .reveal h2 { font-size: 1.05em; }
+    .reveal h3 { font-size: 0.78em; color: var(--accent); }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.8em;
+      margin-top: 0.2em;
+    }
+
+    .meta {
+      margin-top: 1.2em;
+      font-size: 0.66em;
+      color: #c7d2fe;
+    }
+
+    .brand-chip {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid #24436d;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #dbeafe;
+      font-size: 0.5em;
+      margin-bottom: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: linear-gradient(160deg, rgba(16, 28, 46, 0.9), rgba(10, 18, 30, 0.9));
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 0.9em;
+      color: var(--accent);
+    }
+
+    .reveal ul {
+      margin: 0.2em 0 0.1em 1em;
+      font-size: 0.52em;
+      line-height: 1.28;
+    }
+
+    .reveal li { margin: 0.22em 0; }
+
+    .highlight {
+      color: var(--accent-2);
+      font-weight: 650;
+    }
+
+    .risk {
+      color: var(--danger);
+      font-weight: 600;
+    }
+
+    .muted { color: var(--muted); }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .kpi {
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(10, 18, 30, 0.72);
+      text-align: center;
+    }
+
+    .kpi .value {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: #f0f9ff;
+      margin-bottom: 4px;
+    }
+
+    .kpi .label {
+      font-size: 0.52em;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    /* Simple bar chart */
+    .chart {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 240px 1fr 60px;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.56em;
+    }
+
+    .bar-row > span:first-child {
+      white-space: nowrap;
+    }
+
+    .bar-track {
+      width: 100%;
+      background: rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      overflow: hidden;
+      height: 16px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8, #60a5fa);
+    }
+
+    .bar-fill.warn { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .bar-fill.good { background: linear-gradient(90deg, #10b981, #34d399); }
+
+    .footer-note {
+      position: absolute;
+      bottom: 6px;
+      right: 10px;
+      font-size: 0.38em;
+      color: #8ea2bc;
+    }
+
+    .fullscreen-btn {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 50;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.85);
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .section-title {
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+      margin-bottom: 14px;
+    }
+
+    .compact-cards .card {
+      padding: 12px 13px;
+    }
+
+    .compact-cards .card h3 {
+      font-size: 0.72em;
+      margin-bottom: 0.25em;
+    }
+
+    .compact-cards ul {
+      font-size: 0.47em;
+      line-height: 1.2;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .status-item {
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: rgba(9, 18, 32, 0.8);
+      font-size: 0.58em;
+    }
+
+    .status-item strong {
+      display: inline-block;
+      margin-bottom: 6px;
+      font-size: 1.05em;
+    }
+
+    .risk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.52em;
+    }
+
+    .risk-table th,
+    .risk-table td {
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      padding: 9px 10px;
+      vertical-align: top;
+    }
+
+    .risk-table th {
+      background: rgba(56, 189, 248, 0.14);
+      color: #e2e8f0;
+      text-align: left;
+    }
+
+    .note-box {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-left: 4px solid #fbbf24;
+      background: rgba(245, 158, 11, 0.12);
+      border-radius: 8px;
+      font-size: 0.5em;
+      color: #fde68a;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      font-size: 0.46em;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(30, 41, 59, 0.72);
+      padding: 6px 10px;
+      color: #dbeafe;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 0.9em;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .badge.high { background: rgba(248, 113, 113, 0.2); color: #fecaca; }
+    .badge.medium { background: rgba(251, 191, 36, 0.2); color: #fde68a; }
+    .badge.low { background: rgba(52, 211, 153, 0.2); color: #a7f3d0; }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .time-col {
+      background: rgba(8, 18, 33, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-top: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .time-col h3 {
+      margin-bottom: 6px;
+      color: #93c5fd;
+      font-size: 0.75em;
+    }
+
+    .time-col ul {
+      font-size: 0.49em;
+      line-height: 1.24;
+    }
+
+    @media (max-width: 1200px) {
+      .reveal h1 { font-size: 1.5em; }
+      .reveal h2 { font-size: 0.95em; }
+      .reveal h3 { font-size: 0.72em; }
+      .reveal ul { font-size: 0.5em; }
+      .card { padding: 14px 15px; }
+    }
+
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .kpi-row { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 165px 1fr 50px; }
+      .reveal h1 { font-size: 1.25em; }
+      .reveal h2 { font-size: 0.84em; }
+      .reveal h3 { font-size: 0.68em; }
+      .reveal ul { font-size: 0.46em; }
+      .subtitle { font-size: 0.62em; }
+      .meta { font-size: 0.55em; }
+      .timeline,
+      .status-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-height: 760px) {
+      .reveal h1 { font-size: 1.15em; }
+      .reveal h2 { font-size: 0.78em; }
+      .reveal h3 { font-size: 0.64em; }
+      .reveal ul { font-size: 0.44em; line-height: 1.2; }
+      .card { padding: 10px 11px; }
+      .kpi .label { font-size: 0.45em; }
+    }
+  </style>
+</head>
+<body>
+  <button class="fullscreen-btn" onclick="toggleFullscreen()"><i class="fa-solid fa-expand"></i> Pantalla completa</button>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <span class="brand-chip"><i class="fa-solid fa-campground"></i> Camping 44 S.A. • Área IT</span>
+        <h1>Reporte de Gestión IT</h1>
+        <p class="subtitle">Reunión Estratégica Mensual</p>
+        <p class="subtitle">Modo ejecutivo activo (12-15 min) • usar <strong>?modo=full</strong> para versión completa.</p>
+        <p class="meta"><i class="fa-regular fa-calendar"></i> Fecha: Abril 2026</p>
+        <p class="meta muted"><i class="fa-solid fa-user-gear"></i> Responsable IT único • Odoo ERP • Google Workspace</p>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-gauge-high"></i> Estado General del Área IT</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Infraestructura</h3>
+            <ul>
+              <li>Operación de red e internet en seguimiento diario.</li>
+              <li>Servidores y conectividad con estabilidad aceptable.</li>
+              <li>Capacidad técnica limitada para contingencias múltiples.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Sistemas y Soporte</h3>
+            <ul>
+              <li><span class="highlight">Odoo ERP</span>: soporte funcional y continuidad.</li>
+              <li><span class="highlight">Google Workspace</span>: cuentas, acceso y colaboración.</li>
+              <li>Atención integral a usuarios y celulares corporativos.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-id-card-clip"></i> Licencias y Usuarios (Control IT)</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Antivirus corporativo</h3>
+            <ul>
+              <li>Licencias relevadas: <strong>10</strong></li>
+              <li>Licencias en uso: <strong>7</strong></li>
+              <li>Observación: inventario parcial, podría haber más licencias.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Google Workspace</h3>
+            <ul>
+              <li><strong>Business Standard:</strong> 13 asignadas / 1 disponible.</li>
+              <li><strong>Business Starter:</strong> 34 asignadas / 2 disponibles.</li>
+              <li>Total licencias asignadas: <strong>47</strong>.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Usuarios Odoo</h3>
+            <ul>
+              <li>Total registrados: <strong>38</strong> (36 activos / 2 dados de baja).</li>
+              <li>Directorio: <strong>3</strong> • Gerentes/Jefes: <strong>5</strong> • Adm/Capital Humano: <strong>14</strong>.</li>
+              <li>Comercial: <strong>9</strong> • Logística: <strong>3</strong> • SATI: <strong>1</strong> • Marketing: <strong>1</strong>.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Usuarios HANSA</h3>
+            <ul>
+              <li>Licencias totales: <strong>5</strong>.</li>
+              <li>Licencias en uso: <strong>3</strong>.</li>
+              <li>Estado de reorganización: <strong>En curso</strong>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="compact-cards">
+        <h2 class="section-title"><i class="fa-solid fa-list-check"></i> Gestión del Mes: Logros y Actividades</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Infraestructura</h3>
+            <ul>
+              <li>Revisión de puntos críticos de red e internet.</li>
+              <li>Resolución de incidencias operativas prioritarias.</li>
+              <li>Ajustes para mejorar continuidad de servicio.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Sistemas (Odoo / Workspace)</h3>
+            <ul>
+              <li>Coordinación de requerimientos con <strong>SATI</strong>.</li>
+              <li>Gestión de cuentas y accesos con <strong>Grupo OLAM</strong>.</li>
+              <li>Soporte de uso a áreas administrativas y operativas.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Soporte a usuarios</h3>
+            <ul>
+              <li>Atención de incidentes de hardware y software.</li>
+              <li>Asistencia en correo, archivos y dispositivos móviles.</li>
+              <li>Priorización de tickets según impacto de negocio.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Seguridad</h3>
+            <ul>
+              <li>Control básico de accesos y perfiles críticos.</li>
+              <li>Actualización de contraseñas en cuentas sensibles.</li>
+              <li>Refuerzo de buenas prácticas con usuarios clave.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-triangle-exclamation"></i> Problemas Detectados</h2>
+        <div class="card">
+          <ul>
+            <li><span class="risk">Dependencia de proveedores externos</span> para tareas críticas.</li>
+            <li>Falta de documentación técnica y procedimientos formales.</li>
+            <li>Infraestructura de red desordenada (cableado y etiquetado).</li>
+            <li>Equipos obsoletos con mayor probabilidad de falla.</li>
+            <li>Modelo actual altamente reactivo por estructura unipersonal.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-shield-halved"></i> Riesgos Operativos</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Continuidad</h3>
+            <ul>
+              <li>Caídas de servicios críticos (ERP / correo / red).</li>
+              <li>Tiempos de recuperación variables según proveedor.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Seguridad y Resguardo</h3>
+            <ul>
+              <li>Riesgo de phishing y accesos indebidos.</li>
+              <li>Backups sin validación periódica formal.</li>
+              <li>Impacto operativo ante incidentes de datos.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-network-wired"></i> Plan Estratégico: Infraestructura</h2>
+        <div class="card">
+          <ul>
+            <li>Ordenamiento de red: cableado, rack y etiquetado estándar.</li>
+            <li>Plan mensual de mantenimiento preventivo.</li>
+            <li>Monitoreo básico de internet, equipos y disponibilidad.</li>
+            <li>Checklist técnico para contingencias prioritarias.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-user-lock"></i> Plan Estratégico: Seguridad</h2>
+        <div class="card">
+          <ul>
+            <li>Política corporativa de contraseñas robustas.</li>
+            <li>Activación gradual de <strong>2FA</strong> en cuentas críticas.</li>
+            <li>Auditoría trimestral de accesos y permisos.</li>
+            <li>Campaña interna de concientización anti-phishing.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-gears"></i> Plan Estratégico: Sistemas (Odoo / Workspace)</h2>
+        <div class="card">
+          <ul>
+            <li>Roadmap trimestral con <strong>SATI</strong> para Odoo ERP.</li>
+            <li>Priorización de mejoras por impacto operativo.</li>
+            <li>Estandarización de procesos clave entre áreas.</li>
+            <li>Creación de manuales cortos y guías de uso.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-headset"></i> Plan Estratégico: Soporte IT</h2>
+        <div class="card">
+          <ul>
+            <li>Definición de SLA por criticidad de incidencia.</li>
+            <li>Base de conocimiento interna para consultas frecuentes.</li>
+            <li>Organización de tickets: categorías y prioridades.</li>
+            <li>Seguimiento semanal de backlog y tiempos de respuesta.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-boxes-stacked"></i> Plan Estratégico: Inventario y Control</h2>
+        <div class="card">
+          <ul>
+            <li>Inventario completo de activos IT y celulares corporativos.</li>
+            <li>Clasificación por estado: operativo / renovar / crítico.</li>
+            <li>Trazabilidad de asignaciones por usuario y sector.</li>
+            <li>Plan de recambio progresivo de equipos obsoletos.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-chart-column"></i> Indicadores de Gestión (referenciales)</h2>
+
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="value">84</div>
+            <div class="label">Incidencias del mes</div>
+          </div>
+          <div class="kpi">
+            <div class="value">9.5 h</div>
+            <div class="label">Tiempo medio resolución</div>
+          </div>
+          <div class="kpi">
+            <div class="value">92%</div>
+            <div class="label">Backups ejecutados</div>
+          </div>
+          <div class="kpi">
+            <div class="value">81%</div>
+            <div class="label">Cumplimiento SLA</div>
+          </div>
+        </div>
+
+        <div class="chart">
+          <div class="bar-row">
+            <span>Infraestructura</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 78%"></div></div>
+            <span>78%</span>
+          </div>
+          <div class="bar-row">
+            <span>Sistemas</span>
+            <div class="bar-track"><div class="bar-fill warn" style="width: 64%"></div></div>
+            <span>64%</span>
+          </div>
+          <div class="bar-row">
+            <span>Soporte</span>
+            <div class="bar-track"><div class="bar-fill good" style="width: 88%"></div></div>
+            <span>88%</span>
+          </div>
+        </div>
+
+        <p class="subtitle">*Valores de ejemplo para visualización ejecutiva.</p>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-chart-line"></i> KPIs Ejecutivos del Mes</h2>
+        <p class="subtitle">Corte operativo: 23/04/2026 (fuente: planilla de tareas IT compartida).</p>
+        <p class="subtitle">Lectura: estado general del portafolio IT (no solo tickets SATI).</p>
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="value">24</div>
+            <div class="label">Finalizadas</div>
+          </div>
+          <div class="kpi">
+            <div class="value">10</div>
+            <div class="label">Bloqueadas</div>
+          </div>
+          <div class="kpi">
+            <div class="value">38,08%</div>
+            <div class="label">Avance Odoo ERP (SATI)</div>
+          </div>
+          <div class="kpi">
+            <div class="value">Riesgo</div>
+            <div class="label">Backups (validación pendiente)</div>
+          </div>
+        </div>
+        <div class="chart">
+          <div class="bar-row">
+            <span>Finalizadas</span>
+            <div class="bar-track"><div class="bar-fill good" style="width: 52%"></div></div>
+            <span>52%</span>
+          </div>
+          <div class="bar-row">
+            <span>En proceso</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 15%"></div></div>
+            <span>15%</span>
+          </div>
+          <div class="bar-row">
+            <span>Bloq. + Pend.</span>
+            <div class="bar-track"><div class="bar-fill warn" style="width: 33%"></div></div>
+            <span>33%</span>
+          </div>
+        </div>
+        <p class="subtitle">*Distribución del portafolio activo; valores redondeados.</p>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-table-list"></i> Portafolio IT (Resumen de la planilla)</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Distribución de estado</h3>
+            <ul>
+              <li>✅ Finalizado: 24 iniciativas.</li>
+              <li>🟡 En proceso: 7 iniciativas.</li>
+              <li>🟠 Bloqueado: 10 iniciativas.</li>
+              <li>🔴 Pendiente: 4 iniciativas.</li>
+              <li>❌ Cancelado: 1 iniciativa.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Hallazgos clave</h3>
+            <ul>
+              <li>Dependencia de terceros impacta tiempos en temas críticos de Odoo.</li>
+              <li>Existen iniciativas con “100%” pero aún en estado bloqueado/pending (inconsistencia de seguimiento).</li>
+              <li>Hay fechas vencidas con días negativos que requieren replanteo de calendario.</li>
+              <li>Conviene homologar criterio: estado, avance y fecha compromiso.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-folder-tree"></i> Bloque SATI: Soporte y Riesgo ERP</h2>
+        <div class="card">
+          <ul>
+            <li>Secuencia: tickets abiertos → métricas → duración → criticidad → conclusión ejecutiva.</li>
+            <li>Objetivo: mostrar impacto en negocio y justificar acciones de control técnico.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-life-ring"></i> Tickets y Dependencia SATI (Seguimiento)</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Temas críticos abiertos</h3>
+            <ul>
+              <li>Valorización de stock: avances parciales sin fecha firme de cierre.</li>
+              <li>Controles de facturación material controlado: desarrollo creado, aún no implementado.</li>
+              <li>Discrepancias de stock y ajustes de proceso en validación con áreas internas.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Acción de mitigación interna</h3>
+            <ul>
+              <li>Priorizar resolución operativa interna cuando el bloqueo del proveedor comprometa negocio.</li>
+              <li>Escalar tickets por criticidad con fecha objetivo y responsable explícito.</li>
+              <li>Definir comité quincenal IT + SATI para compromisos cerrados por acta.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-chart-pie"></i> Soporte Odoo SATI · KPIs Ejecutivos</h2>
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="value">37</div>
+            <div class="label">Tickets totales</div>
+          </div>
+          <div class="kpi">
+            <div class="value">~26 días</div>
+            <div class="label">Promedio de resolución</div>
+          </div>
+          <div class="kpi">
+            <div class="value">~40%</div>
+            <div class="label">Tickets críticos</div>
+          </div>
+          <div class="kpi">
+            <div class="value">~100 días</div>
+            <div class="label">Caso más largo</div>
+          </div>
+        </div>
+        <div class="pill-row">
+          <span class="pill">Recurrentes: Facturación electrónica, XML/SIFEN, permisos, series.</span>
+          <span class="pill">Abiertos críticos recientes: #7223, #7207, #6864.</span>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-hourglass-half"></i> Duración de Tickets (SATI)</h2>
+        <div class="chart">
+          <div class="bar-row">
+            <span>0–7 días</span>
+            <div class="bar-track"><div class="bar-fill good" style="width: 22%"></div></div>
+            <span>22%</span>
+          </div>
+          <div class="bar-row">
+            <span>8–30 días</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 41%"></div></div>
+            <span>41%</span>
+          </div>
+          <div class="bar-row">
+            <span>+30 días</span>
+            <div class="bar-track"><div class="bar-fill warn" style="width: 37%"></div></div>
+            <span>37%</span>
+          </div>
+        </div>
+        <div class="note-box">
+          Señal de alerta: una proporción alta supera 30 días, elevando riesgo operativo y fiscal en procesos de facturación.
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Distribución por Tipo y Criticidad</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Por tipo de ticket</h3>
+            <div class="chart">
+              <div class="bar-row">
+                <span>Error</span>
+                <div class="bar-track"><div class="bar-fill warn" style="width: 73%"></div></div>
+                <span>73%</span>
+              </div>
+              <div class="bar-row">
+                <span>Mejora / Consulta</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 19%"></div></div>
+                <span>19%</span>
+              </div>
+              <div class="bar-row">
+                <span>Estratégico / Seg.</span>
+                <div class="bar-track"><div class="bar-fill good" style="width: 8%"></div></div>
+                <span>8%</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Por criticidad</h3>
+            <div class="chart">
+              <div class="bar-row">
+                <span>Crítica</span>
+                <div class="bar-track"><div class="bar-fill warn" style="width: 40%"></div></div>
+                <span>40%</span>
+              </div>
+              <div class="bar-row">
+                <span>Alta</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 33%"></div></div>
+                <span>33%</span>
+              </div>
+              <div class="bar-row">
+                <span>Media / Baja</span>
+                <div class="bar-track"><div class="bar-fill good" style="width: 27%"></div></div>
+                <span>27%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-triangle-exclamation"></i> Conclusiones Ejecutivas SATI</h2>
+        <div class="card">
+          <ul>
+            <li><strong>Insight clave:</strong> el ERP es crítico, pero hoy la empresa no tiene control técnico suficiente.</li>
+            <li><strong>Patrón observado:</strong> alta recurrencia en temas fiscales/operativos (XML, SIFEN, permisos, series).</li>
+            <li><strong>Impacto:</strong> riesgo operativo, fiscal, financiero y estratégico por demoras y dependencia total.</li>
+            <li><strong>Conclusión:</strong> alta dependencia + ausencia de SLA formal = riesgo alto de negocio.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-route"></i> Plan de Acción Soporte Odoo (90 días)</h2>
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th>Frente</th>
+              <th>Acción</th>
+              <th>Plazo</th>
+              <th>Resultado esperado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gobernanza</td>
+              <td>SLA formal SATI con tiempos por criticidad y escalamiento.</td>
+              <td>30 días</td>
+              <td>Reducción de incertidumbre y trazabilidad de compromisos.</td>
+            </tr>
+            <tr>
+              <td>Control técnico</td>
+              <td>Acceso técnico + auditoría de customizaciones y versionado.</td>
+              <td>45 días</td>
+              <td>Menor dependencia y mejor calidad de cambios.</td>
+            </tr>
+            <tr>
+              <td>Gestión operativa</td>
+              <td>Dashboard IT con filtro de tickets críticos y aging.</td>
+              <td>60 días</td>
+              <td>Seguimiento ejecutivo semanal orientado a riesgo.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Bloque Decisiones: Proveedores y Ejecución</h2>
+        <div class="card">
+          <ul>
+            <li>Secuencia: evaluación de partners Odoo → presupuestos cableado → acción operativa de costos.</li>
+            <li>Objetivo: reducir dependencia, estabilizar infraestructura y asegurar continuidad.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-handshake-angle"></i> Evaluación de Nuevos Partners Odoo</h2>
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th>Proveedor</th>
+              <th>Estado</th>
+              <th>Fortaleza principal</th>
+              <th>Observación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SEGEL</td>
+              <td>Presupuesto recibido</td>
+              <td>Soporte funcional Odoo + acompañamiento.</td>
+              <td>Validar tiempos de respuesta en incidentes críticos.</td>
+            </tr>
+            <tr>
+              <td>CRITERIUM</td>
+              <td>Presupuesto recibido</td>
+              <td>Metodología de proyectos y mejora continua.</td>
+              <td>Revisar costo total anual y alcance real del SLA.</td>
+            </tr>
+            <tr>
+              <td>RUGERTEK</td>
+              <td>En evaluación</td>
+              <td>Alternativa técnica para evolución de módulos.</td>
+              <td>Solicitar propuesta cerrada con cronograma y equipo asignado.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box">
+          Motivo del cambio: la dependencia operativa actual dejó de ser viable para procesos críticos desde enero/febrero 2026.
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-network-wired"></i> Presupuestos Cableado / Sala de Servidores</h2>
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th>Proveedor</th>
+              <th>Alcance</th>
+              <th>Estado</th>
+              <th>Próximo paso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cidicom</td>
+              <td>Ordenamiento de rack, patch panel y etiquetado.</td>
+              <td>Presupuesto recibido</td>
+              <td>Comparar costo/beneficio y tiempo de ejecución.</td>
+            </tr>
+            <tr>
+              <td>Celexx</td>
+              <td>Recableado estructurado y estandarización de bocas.</td>
+              <td>Presupuesto recibido</td>
+              <td>Definir adjudicación y ventana de implementación.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box">
+          Objetivo: reducir riesgo de caída operativa por desorden físico y falta de trazabilidad de red.
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-calendar-check"></i> Acción Operativa Programada: Costos Odoo</h2>
+        <div class="card">
+          <ul>
+            <li><strong>Fecha confirmada:</strong> sábado <strong>25 de abril de 2026</strong>, posterior al cierre laboral.</li>
+            <li><strong>Actividad:</strong> reseteo de costos de productos y carga de costos reales en Odoo.</li>
+            <li><strong>Justificación:</strong> dependencia de SATI desde enero/febrero 2026 sin respuesta viable.</li>
+            <li><strong>Control:</strong> respaldo previo, registro de cambios y validación post-implementación.</li>
+            <li><strong>Comunicación:</strong> aviso a áreas sobre ventana de mantenimiento y pruebas del lunes siguiente.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-bolt"></i> Matriz de Riesgos Operativos</h2>
+        <table class="risk-table">
+          <thead>
+            <tr>
+              <th>Riesgo</th>
+              <th>Impacto</th>
+              <th>Acción en curso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dependencia de proveedores externos</td>
+              <td><span class="badge high">ALTO</span></td>
+              <td>Mitigación en proceso: definición de contingencias internas y documentación técnica.</td>
+            </tr>
+            <tr>
+              <td>Caídas de sistemas críticos</td>
+              <td><span class="badge high">ALTO</span></td>
+              <td>Monitoreo en implementación y protocolo de respuesta prioritaria.</td>
+            </tr>
+            <tr>
+              <td>Seguridad (phishing / accesos indebidos)</td>
+              <td><span class="badge medium">MEDIO</span></td>
+              <td>Capacitación pendiente + fortalecimiento de controles de acceso.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-traffic-light"></i> Estado del Área IT (Semáforo)</h2>
+        <div class="status-grid">
+          <div class="status-item">
+            <strong>Infraestructura: 🟡</strong><br>
+            Red operativa con mejoras pendientes en ordenamiento físico y monitoreo continuo.
+          </div>
+          <div class="status-item">
+            <strong>Seguridad: 🔴</strong><br>
+            Requiere acelerar 2FA, políticas formales y capacitación anti-phishing.
+          </div>
+          <div class="status-item">
+            <strong>Sistemas: 🟢</strong><br>
+            Odoo y Workspace estables, con roadmap de optimización en ejecución.
+          </div>
+          <div class="status-item">
+            <strong>Soporte: 🟡</strong><br>
+            Buen nivel operativo, con oportunidad de mejora vía SLA y base de conocimiento.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-road"></i> Roadmap Trimestral IT</h2>
+        <div class="timeline">
+          <div class="time-col">
+            <h3>Q2 · Estabilización</h3>
+            <ul>
+              <li>Ordenamiento de red y etiquetado físico.</li>
+              <li>Inventario completo de activos y celulares.</li>
+              <li>Definición inicial de SLA de soporte.</li>
+            </ul>
+          </div>
+          <div class="time-col">
+            <h3>Q3 · Control y Seguridad</h3>
+            <ul>
+              <li>Implementación de 2FA en cuentas críticas.</li>
+              <li>Auditoría de accesos y permisos por área.</li>
+              <li>Base de conocimiento y estandarización de tickets.</li>
+            </ul>
+          </div>
+          <div class="time-col">
+            <h3>Q4 · Optimización y Escalabilidad</h3>
+            <ul>
+              <li>Roadmap avanzado Odoo con SATI.</li>
+              <li>Validación periódica de backups y pruebas de recuperación.</li>
+              <li>Plan de renovación de equipos obsoletos.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-flag-checkered"></i> Cierre y Dirección Estratégica</h2>
+        <div class="card">
+          <ul>
+            <li>Transición del modelo <strong>reactivo</strong> a uno <strong>preventivo y estratégico</strong>.</li>
+            <li>Foco en continuidad operativa, seguridad y estandarización.</li>
+            <li>Alineación de IT con el crecimiento de Camping 44 S.A.</li>
+            <li>Próximo paso: seguimiento mensual con KPIs y hitos del roadmap.</li>
+          </ul>
+        </div>
+        <p class="footer-note">Presentación IT • Camping 44 S.A.</p>
+      </section>
+
+      <section>
+        <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> Mensaje Final: Evolución del Área IT</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Evolución de gestión</h3>
+            <ul>
+              <li>IT consolida una visión de servicio con foco en negocio.</li>
+              <li>Se fortalecen procesos, métricas y control operativo.</li>
+              <li>Se reduce dependencia de reacción ante urgencias.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Dirección estratégica</h3>
+            <ul>
+              <li>Paso sostenido de modelo reactivo a preventivo.</li>
+              <li>Prioridad en seguridad, control y eficiencia operativa.</li>
+              <li>Alineación de IT con el crecimiento de Camping 44 S.A.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Modo ejecutivo por defecto (12-15 minutos aprox).
+    // Para ver TODO el contenido: agregar ?modo=full a la URL.
+    (function applyExecutiveMode() {
+      const params = new URLSearchParams(window.location.search);
+      const mode = params.get('modo');
+      const executiveMode = mode !== 'full';
+      if (!executiveMode) return;
+
+      const keepTitles = [
+        'Estado General del Área IT',
+        'Licencias y Usuarios (Control IT)',
+        'Gestión del Mes: Logros y Actividades',
+        'Problemas Detectados',
+        'KPIs Ejecutivos del Mes',
+        'Soporte Odoo SATI · KPIs Ejecutivos',
+        'Duración de Tickets (SATI)',
+        'Distribución por Tipo y Criticidad',
+        'Conclusiones Ejecutivas SATI',
+        'Evaluación de Nuevos Partners Odoo',
+        'Presupuestos Cableado / Sala de Servidores',
+        'Acción Operativa Programada: Costos Odoo',
+        'Plan de Acción Soporte Odoo (90 días)',
+        'Cierre y Dirección Estratégica'
+      ];
+
+      const slidesRoot = document.querySelector('.slides');
+      const sections = Array.from(slidesRoot.querySelectorAll(':scope > section'));
+      sections.forEach((section, index) => {
+        if (index === 0) return; // Portada siempre visible
+        const titleEl = section.querySelector('h2, h1');
+        const title = titleEl ? titleEl.textContent.replace(/\s+/g, ' ').trim() : '';
+        const keep = keepTitles.some((k) => title.includes(k));
+        if (!keep) section.remove();
+      });
+    })();
+
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'fade',
+      backgroundTransition: 'slide',
+      controls: true,
+      progress: true,
+      center: true,
+      margin: 0.02,
+      minScale: 0.2,
+      maxScale: 1.5
+    });
+  </script>
+</body>
+</html>
