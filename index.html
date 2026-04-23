@@ -198,6 +198,61 @@
       cursor: pointer;
     }
 
+    .back-btn {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 50;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.85);
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .mode-selector {
+      min-height: 100vh;
+      display: none;
+      place-items: center;
+      background: radial-gradient(circle at top right, #1d2d49 0%, #0b1320 45%, #05080f 100%);
+      color: #e5e7eb;
+      font-family: "Inter", "Segoe UI", "Roboto", Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .mode-card {
+      max-width: 860px;
+      width: 100%;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 16px;
+      padding: 26px;
+      background: rgba(10, 18, 30, 0.88);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.35);
+    }
+
+    .mode-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .mode-btn {
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 10px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #e2e8f0;
+      padding: 14px 12px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .mode-btn strong { display: block; font-size: 16px; margin-bottom: 3px; }
+
     .section-title {
       border-left: 4px solid var(--accent);
       padding-left: 12px;
@@ -358,7 +413,25 @@
   </style>
 </head>
 <body>
-  <button class="fullscreen-btn" onclick="toggleFullscreen()"><i class="fa-solid fa-expand"></i> Pantalla completa</button>
+  <div id="modeSelector" class="mode-selector">
+    <div class="mode-card">
+      <h1 style="margin:0 0 6px 0;">Reporte de Gestión IT</h1>
+      <p class="subtitle" style="margin:0;">Camping 44 S.A. · Seleccionar modo de presentación</p>
+      <div class="mode-actions">
+        <button class="mode-btn" onclick="selectMode('resumen')">
+          <strong>Modo Resumen (Recomendado)</strong>
+          12-15 minutos · versión ejecutiva para comité.
+        </button>
+        <button class="mode-btn" onclick="selectMode('full')">
+          <strong>Modo Full</strong>
+          Contenido completo con detalle ampliado.
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <button id="backBtn" class="back-btn" style="display:none;" onclick="goBackToSelector()"><i class="fa-solid fa-arrow-left"></i> Volver</button>
+  <button id="fullscreenBtn" class="fullscreen-btn" style="display:none;" onclick="toggleFullscreen()"><i class="fa-solid fa-expand"></i> Pantalla completa</button>
   <div class="reveal">
     <div class="slides">
 
@@ -366,7 +439,7 @@
         <span class="brand-chip"><i class="fa-solid fa-campground"></i> Camping 44 S.A. • Área IT</span>
         <h1>Reporte de Gestión IT</h1>
         <p class="subtitle">Reunión Estratégica Mensual</p>
-        <p class="subtitle">Modo ejecutivo activo (12-15 min) • usar <strong>?modo=full</strong> para versión completa.</p>
+        <p class="subtitle">Modo seleccionado desde pantalla inicial (resumen o full).</p>
         <p class="meta"><i class="fa-regular fa-calendar"></i> Fecha: Abril 2026</p>
         <p class="meta muted"><i class="fa-solid fa-user-gear"></i> Responsable IT único • Odoo ERP • Google Workspace</p>
       </section>
@@ -1068,12 +1141,10 @@
       }
     }
 
-    // Modo ejecutivo por defecto (12-15 minutos aprox).
-    // Para ver TODO el contenido: agregar ?modo=full a la URL.
-    (function applyExecutiveMode() {
+    function applyExecutiveMode() {
       const params = new URLSearchParams(window.location.search);
       const mode = params.get('modo');
-      const executiveMode = mode !== 'full';
+      const executiveMode = mode === 'resumen';
       if (!executiveMode) return;
 
       const keepTitles = [
@@ -1102,9 +1173,46 @@
         const keep = keepTitles.some((k) => title.includes(k));
         if (!keep) section.remove();
       });
-    })();
+    }
 
-    Reveal.initialize({
+    function selectMode(mode) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('modo', mode);
+      url.hash = '';
+      window.location.href = url.toString();
+    }
+
+    function goBackToSelector() {
+      const url = new URL(window.location.href);
+      url.search = '';
+      url.hash = '';
+      window.location.href = url.toString();
+    }
+
+    (function bootPresentation() {
+      const params = new URLSearchParams(window.location.search);
+      const mode = params.get('modo');
+      const selector = document.getElementById('modeSelector');
+      const revealEl = document.querySelector('.reveal');
+      const fullscreenBtn = document.getElementById('fullscreenBtn');
+      const backBtn = document.getElementById('backBtn');
+
+      if (!mode) {
+        selector.style.display = 'grid';
+        revealEl.style.display = 'none';
+        fullscreenBtn.style.display = 'none';
+        backBtn.style.display = 'none';
+        return;
+      }
+
+      selector.style.display = 'none';
+      revealEl.style.display = 'block';
+      fullscreenBtn.style.display = 'block';
+      backBtn.style.display = 'block';
+
+      applyExecutiveMode();
+
+      Reveal.initialize({
       hash: true,
       slideNumber: true,
       transition: 'fade',
@@ -1116,6 +1224,7 @@
       minScale: 0.2,
       maxScale: 1.5
     });
+    })();
   </script>
 </body>
 </html>
