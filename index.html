@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte de Gestión IT - Camping 44 S.A.</title>
+
+  <!-- Reveal.js core + theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-primary: #0b1320;
+      --bg-secondary: #111c2e;
+      --accent: #38bdf8;
+      --accent-2: #34d399;
+      --text: #e5e7eb;
+      --muted: #93a3b8;
+      --danger: #f87171;
+      --warn: #fbbf24;
+    }
+
+    .reveal {
+      font-family: "Inter", "Segoe UI", "Roboto", Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top right, #1d2d49 0%, var(--bg-primary) 45%, #05080f 100%);
+    }
+
+    .reveal .slides section {
+      text-align: left;
+    }
+
+    .reveal .slides section.present {
+      overflow-y: auto;
+      max-height: 100%;
+      padding-right: 10px;
+    }
+
+    .reveal h1,
+    .reveal h2,
+    .reveal h3 {
+      text-transform: none;
+      letter-spacing: 0.2px;
+      margin-bottom: 0.4em;
+      color: #f8fafc;
+    }
+
+    .reveal h1 { font-size: 2.1em; }
+    .reveal h2 { font-size: 1.45em; }
+    .reveal h3 { font-size: 1.05em; color: var(--accent); }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.8em;
+      margin-top: 0.2em;
+    }
+
+    .meta {
+      margin-top: 1.2em;
+      font-size: 0.66em;
+      color: #c7d2fe;
+    }
+
+    .brand-chip {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid #24436d;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #dbeafe;
+      font-size: 0.5em;
+      margin-bottom: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: linear-gradient(160deg, rgba(16, 28, 46, 0.9), rgba(10, 18, 30, 0.9));
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 0.9em;
+      color: var(--accent);
+    }
+
+    .reveal ul {
+      margin: 0.2em 0 0.1em 1em;
+      font-size: 0.7em;
+      line-height: 1.36;
+    }
+
+    .reveal li { margin: 0.22em 0; }
+
+    .highlight {
+      color: var(--accent-2);
+      font-weight: 650;
+    }
+
+    .risk {
+      color: var(--danger);
+      font-weight: 600;
+    }
+
+    .muted { color: var(--muted); }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .kpi {
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(10, 18, 30, 0.72);
+      text-align: center;
+    }
+
+    .kpi .value {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: #f0f9ff;
+      margin-bottom: 4px;
+    }
+
+    .kpi .label {
+      font-size: 0.52em;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    /* Simple bar chart */
+    .chart {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 170px 1fr 60px;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.6em;
+    }
+
+    .bar-track {
+      width: 100%;
+      background: rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      overflow: hidden;
+      height: 16px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8, #60a5fa);
+    }
+
+    .bar-fill.warn { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .bar-fill.good { background: linear-gradient(90deg, #10b981, #34d399); }
+
+    .footer-note {
+      position: absolute;
+      bottom: 6px;
+      right: 10px;
+      font-size: 0.38em;
+      color: #8ea2bc;
+    }
+
+    @media (max-width: 1200px) {
+      .reveal h1 { font-size: 1.7em; }
+      .reveal h2 { font-size: 1.2em; }
+      .reveal h3 { font-size: 0.9em; }
+      .reveal ul { font-size: 0.62em; }
+      .card { padding: 14px 15px; }
+    }
+
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .kpi-row { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 120px 1fr 50px; }
+      .reveal h1 { font-size: 1.4em; }
+      .reveal h2 { font-size: 1.05em; }
+      .reveal h3 { font-size: 0.82em; }
+      .reveal ul { font-size: 0.56em; }
+      .subtitle { font-size: 0.62em; }
+      .meta { font-size: 0.55em; }
+    }
+
+    @media (max-height: 760px) {
+      .reveal h1 { font-size: 1.35em; }
+      .reveal h2 { font-size: 1em; }
+      .reveal h3 { font-size: 0.8em; }
+      .reveal ul { font-size: 0.52em; line-height: 1.28; }
+      .card { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <span class="brand-chip"><i class="fa-solid fa-campground"></i> Camping 44 S.A. • Área IT</span>
+        <h1>Reporte de Gestión IT</h1>
+        <p class="subtitle">Reunión Estratégica Mensual</p>
+        <p class="meta"><i class="fa-regular fa-calendar"></i> Fecha: Abril 2026</p>
+        <p class="meta muted"><i class="fa-solid fa-user-gear"></i> Responsable IT único • Odoo ERP • Google Workspace</p>
+      </section>
+
+      <section>
+        <h2><i class="fa-solid fa-gauge-high"></i> Estado General del Área IT</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Infraestructura</h3>
+            <ul>
+              <li>Operación de red e internet en seguimiento diario.</li>
+              <li>Servidores y conectividad con estabilidad aceptable.</li>
+              <li>Capacidad técnica limitada para contingencias múltiples.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Sistemas y Soporte</h3>
+            <ul>
+              <li><span class="highlight">Odoo ERP</span>: soporte funcional y continuidad.</li>
+              <li><span class="highlight">Google Workspace</span>: cuentas, acceso y colaboración.</li>
+              <li>Atención integral a usuarios y celulares corporativos.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="fa-solid fa-list-check"></i> Gestión del Mes: Logros y Actividades</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Infraestructura</h3>
+            <ul>
+              <li>Revisión de puntos críticos de red e internet.</li>
+              <li>Resolución de incidencias operativas prioritarias.</li>
+              <li>Ajustes para mejorar continuidad de servicio.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Sistemas (Odoo / Workspace)</h3>
+            <ul>
+              <li>Coordinación de requerimientos con <strong>SATI</strong>.</li>
+              <li>Gestión de cuentas y accesos con <strong>Grupo OLAM</strong>.</li>
+              <li>Soporte de uso a áreas administrativas y operativas.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Soporte a usuarios</h3>
+            <ul>
+              <li>Atención de incidentes de hardware y software.</li>
+              <li>Asistencia en correo, archivos y dispositivos móviles.</li>
+              <li>Priorización de tickets según impacto de negocio.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Seguridad</h3>
+            <ul>
+              <li>Control básico de accesos y perfiles críticos.</li>
+              <li>Actualización de contraseñas en cuentas sensibles.</li>
+              <li>Refuerzo de buenas prácticas con usuarios clave.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="fa-solid fa-triangle-exclamation"></i> Problemas Detectados</h2>
+        <div class="card">
+          <ul>
+            <li><span class="risk">Dependencia de proveedores externos</span> para tareas críticas.</li>
+            <li>Falta de documentación técnica y procedimientos formales.</li>
+            <li>Infraestructura de red desordenada (cableado y etiquetado).</li>
+            <li>Equipos obsoletos con mayor probabilidad de falla.</li>
+            <li>Modelo actual altamente reactivo por estructura unipersonal.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="fa-solid fa-shield-halved"></i> Riesgos Operativos</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Continuidad</h3>
+            <ul>
+              <li>Caídas de servicios críticos (ERP / correo / red).</li>
+              <li>Tiempos de recuperación variables según proveedor.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Seguridad y Resguardo</h3>
+            <ul>
+              <li>Riesgo de phishing y accesos indebidos.</li>
+              <li>Backups sin validación periódica formal.</li>
+              <li>Impacto operativo ante incidentes de datos.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="fa-solid fa-network-wired"></i> Plan Estratégico: Infraestructura</h2>
+        <div class="card">
+          <ul>
+            <li>Ordenamiento de red: cableado, rack y etiquetado estándar.</li>
+            <li>Plan mensual de mantenimiento preventivo.</li>
+            <li>Monitoreo básico de internet, equipos y disponibilidad.</li>
+            <li>Checklist técnico para contingencias prioritarias.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="fa-solid fa-user-lock"></i> Plan Estratégico: Seguridad</h2>
+        <div class="card">
+          <ul>
+            <li>Política corporativa de contraseñas robustas.</li>
+            <li>Activación gradual de <strong>2FA</strong> en cuentas críticas.</li>
+            <li>Auditoría trimestral de accesos y permisos.</li>
+            <li>Campaña interna de concientización anti-phishing.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="fa-solid fa-gears"></i> Plan Estratégico: Sistemas (Odoo / Workspace)</h2>
+        <div class="card">
+          <ul>
+            <li>Roadmap trimestral con <strong>SATI</strong> para Odoo ERP.</li>
+            <li>Priorización de mejoras por impacto operativo.</li>
+            <li>Estandarización de procesos clave entre áreas.</li>
+            <li>Creación de manuales cortos y guías de uso.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="fa-solid fa-headset"></i> Plan Estratégico: Soporte IT</h2>
+        <div class="card">
+          <ul>
+            <li>Definición de SLA por criticidad de incidencia.</li>
+            <li>Base de conocimiento interna para consultas frecuentes.</li>
+            <li>Organización de tickets: categorías y prioridades.</li>
+            <li>Seguimiento semanal de backlog y tiempos de respuesta.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="fa-solid fa-boxes-stacked"></i> Plan Estratégico: Inventario y Control</h2>
+        <div class="card">
+          <ul>
+            <li>Inventario completo de activos IT y celulares corporativos.</li>
+            <li>Clasificación por estado: operativo / renovar / crítico.</li>
+            <li>Trazabilidad de asignaciones por usuario y sector.</li>
+            <li>Plan de recambio progresivo de equipos obsoletos.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="fa-solid fa-chart-column"></i> Indicadores de Gestión (referenciales)</h2>
+
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="value">84</div>
+            <div class="label">Incidencias del mes</div>
+          </div>
+          <div class="kpi">
+            <div class="value">9.5 h</div>
+            <div class="label">Tiempo medio resolución</div>
+          </div>
+          <div class="kpi">
+            <div class="value">92%</div>
+            <div class="label">Backups ejecutados</div>
+          </div>
+        </div>
+
+        <div class="chart">
+          <div class="bar-row">
+            <span>Infraestructura</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 78%"></div></div>
+            <span>78%</span>
+          </div>
+          <div class="bar-row">
+            <span>Sistemas</span>
+            <div class="bar-track"><div class="bar-fill warn" style="width: 64%"></div></div>
+            <span>64%</span>
+          </div>
+          <div class="bar-row">
+            <span>Soporte</span>
+            <div class="bar-track"><div class="bar-fill good" style="width: 88%"></div></div>
+            <span>88%</span>
+          </div>
+        </div>
+
+        <p class="subtitle">*Valores de ejemplo para visualización ejecutiva.</p>
+      </section>
+
+      <section>
+        <h2><i class="fa-solid fa-flag-checkered"></i> Cierre y Dirección Estratégica</h2>
+        <div class="card">
+          <ul>
+            <li>Transición del modelo <strong>reactivo</strong> a uno <strong>preventivo y estratégico</strong>.</li>
+            <li>Foco en continuidad operativa, seguridad y estandarización.</li>
+            <li>Alineación de IT con el crecimiento de Camping 44 S.A.</li>
+            <li>Próximo paso: seguimiento mensual con KPIs y hitos del roadmap.</li>
+          </ul>
+        </div>
+        <p class="footer-note">Presentación IT • Camping 44 S.A.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'fade',
+      backgroundTransition: 'slide',
+      controls: true,
+      progress: true,
+      center: true,
+      margin: 0.02,
+      minScale: 0.2,
+      maxScale: 1.5
+    });
+  </script>
+</body>
+</html>
