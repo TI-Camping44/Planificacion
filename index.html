@@ -366,6 +366,7 @@
         <span class="brand-chip"><i class="fa-solid fa-campground"></i> Camping 44 S.A. • Área IT</span>
         <h1>Reporte de Gestión IT</h1>
         <p class="subtitle">Reunión Estratégica Mensual</p>
+        <p class="subtitle">Modo ejecutivo activo (12-15 min) • usar <strong>?modo=full</strong> para versión completa.</p>
         <p class="meta"><i class="fa-regular fa-calendar"></i> Fecha: Abril 2026</p>
         <p class="meta muted"><i class="fa-solid fa-user-gear"></i> Responsable IT único • Odoo ERP • Google Workspace</p>
       </section>
@@ -1066,6 +1067,42 @@
         document.exitFullscreen();
       }
     }
+
+    // Modo ejecutivo por defecto (12-15 minutos aprox).
+    // Para ver TODO el contenido: agregar ?modo=full a la URL.
+    (function applyExecutiveMode() {
+      const params = new URLSearchParams(window.location.search);
+      const mode = params.get('modo');
+      const executiveMode = mode !== 'full';
+      if (!executiveMode) return;
+
+      const keepTitles = [
+        'Estado General del Área IT',
+        'Licencias y Usuarios (Control IT)',
+        'Gestión del Mes: Logros y Actividades',
+        'Problemas Detectados',
+        'KPIs Ejecutivos del Mes',
+        'Soporte Odoo SATI · KPIs Ejecutivos',
+        'Duración de Tickets (SATI)',
+        'Distribución por Tipo y Criticidad',
+        'Conclusiones Ejecutivas SATI',
+        'Evaluación de Nuevos Partners Odoo',
+        'Presupuestos Cableado / Sala de Servidores',
+        'Acción Operativa Programada: Costos Odoo',
+        'Plan de Acción Soporte Odoo (90 días)',
+        'Cierre y Dirección Estratégica'
+      ];
+
+      const slidesRoot = document.querySelector('.slides');
+      const sections = Array.from(slidesRoot.querySelectorAll(':scope > section'));
+      sections.forEach((section, index) => {
+        if (index === 0) return; // Portada siempre visible
+        const titleEl = section.querySelector('h2, h1');
+        const title = titleEl ? titleEl.textContent.replace(/\s+/g, ' ').trim() : '';
+        const keep = keepTitles.some((k) => title.includes(k));
+        if (!keep) section.remove();
+      });
+    })();
 
     Reveal.initialize({
       hash: true,
