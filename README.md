@@ -6,7 +6,6 @@ Este repositorio incluye una presentación estratégica mensual del área IT en 
 
 - `index.html` → archivo principal para publicación (GitHub Pages usa este archivo por defecto).
 - `deck-it-camping44.html` → acceso alternativo / compatibilidad.
-- `locker-resumen.html` → dashboard estilo Looker con gráficos de resumen semanal/mensual.
 
 ## Ver la presentación en enlace público (GitHub Pages)
 

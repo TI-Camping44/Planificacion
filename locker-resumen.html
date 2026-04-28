@@ -54,6 +54,7 @@
     }
     .card h2 { margin: 0 0 8px; font-size: 16px; }
     .note { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .chart-box { position: relative; height: 320px; }
 
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     th, td { border: 1px solid var(--border); padding: 8px; text-align: left; }
@@ -87,25 +88,25 @@
     <section class="grid">
       <article class="card">
         <h2>Portafolio IT por estado</h2>
-        <canvas id="estadoChart" height="140"></canvas>
+        <div class="chart-box"><canvas id="estadoChart"></canvas></div>
       </article>
       <article class="card">
         <h2>Tickets SATI por duración</h2>
-        <canvas id="duracionChart" height="140"></canvas>
+        <div class="chart-box"><canvas id="duracionChart"></canvas></div>
       </article>
 
       <article class="card">
         <h2>Tickets SATI por tipo</h2>
-        <canvas id="tipoChart" height="140"></canvas>
+        <div class="chart-box"><canvas id="tipoChart"></canvas></div>
       </article>
       <article class="card">
         <h2>Tickets SATI por criticidad</h2>
-        <canvas id="criticidadChart" height="140"></canvas>
+        <div class="chart-box"><canvas id="criticidadChart"></canvas></div>
       </article>
 
       <article class="card">
         <h2>Uso de licencias / usuarios</h2>
-        <canvas id="licenciasChart" height="160"></canvas>
+        <div class="chart-box"><canvas id="licenciasChart"></canvas></div>
         <div class="note">Antivirus y HANSA reflejan datos parciales/operativos relevados al corte.</div>
       </article>
 
@@ -131,6 +132,7 @@
     const baseOptions = {
       responsive: true,
       maintainAspectRatio: false,
+      animation: false,
       plugins: {
         legend: { labels: { color: '#e5e7eb' } }
       },
@@ -147,10 +149,12 @@
         datasets: [{
           label: 'Cantidad',
           data: [24, 7, 10, 4, 1],
-          backgroundColor: ['#34d399', '#38bdf8', '#fbbf24', '#f87171', '#64748b']
+          backgroundColor: ['#34d399', '#38bdf8', '#fbbf24', '#f87171', '#64748b'],
+          categoryPercentage: 0.65,
+          barPercentage: 0.8
         }]
       },
-      options: baseOptions
+      options: { ...baseOptions, scales: { ...baseOptions.scales, y: { ...baseOptions.scales.y, max: 30 } } }
     });
 
     new Chart(document.getElementById('duracionChart'), {
