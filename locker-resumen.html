@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard IT - Estilo Looker | Camping 44</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0b1320;
+      --panel: #111c2e;
+      --panel-2: #0f1727;
+      --text: #e5e7eb;
+      --muted: #93a3b8;
+      --accent: #38bdf8;
+      --ok: #34d399;
+      --warn: #fbbf24;
+      --danger: #f87171;
+      --border: rgba(148, 163, 184, 0.25);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top right, #1d2d49 0%, var(--bg) 45%, #05080f 100%);
+      min-height: 100vh;
+    }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 18px; }
+    .top {
+      display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    h1 { margin: 0; font-size: 28px; }
+    .sub { color: var(--muted); margin-top: 4px; font-size: 14px; }
+    .btn {
+      border: 1px solid var(--border); background: rgba(56,189,248,.1); color: var(--text);
+      border-radius: 8px; padding: 8px 10px; text-decoration: none; font-size: 13px;
+    }
+    .kpis {
+      display: grid; grid-template-columns: repeat(6, minmax(140px, 1fr)); gap: 10px; margin: 12px 0;
+    }
+    .kpi {
+      background: var(--panel-2); border: 1px solid var(--border); border-radius: 12px; padding: 12px;
+    }
+    .kpi .value { font-size: 26px; font-weight: 700; }
+    .kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .5px; }
+
+    .grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+    .card {
+      background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 14px;
+    }
+    .card h2 { margin: 0 0 8px; font-size: 16px; }
+    .note { color: var(--muted); font-size: 12px; margin-top: 8px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border: 1px solid var(--border); padding: 8px; text-align: left; }
+    th { background: rgba(56, 189, 248, 0.12); }
+
+    @media (max-width: 980px) {
+      .kpis { grid-template-columns: repeat(2, 1fr); }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Dashboard IT (estilo Looker)</h1>
+        <div class="sub">Camping 44 S.A. · Resumen semanal y mensual · Corte: 23/04/2026</div>
+      </div>
+      <a class="btn" href="./index.html">Abrir presentación Reveal</a>
+    </div>
+
+    <section class="kpis">
+      <div class="kpi"><div class="value">24</div><div class="label">Tareas finalizadas</div></div>
+      <div class="kpi"><div class="value">10</div><div class="label">Tareas bloqueadas</div></div>
+      <div class="kpi"><div class="value">37</div><div class="label">Tickets SATI</div></div>
+      <div class="kpi"><div class="value">~26 d</div><div class="label">Promedio resolución</div></div>
+      <div class="kpi"><div class="value">~40%</div><div class="label">Tickets críticos</div></div>
+      <div class="kpi"><div class="value">38,08%</div><div class="label">Avance Odoo ERP</div></div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Portafolio IT por estado</h2>
+        <canvas id="estadoChart" height="140"></canvas>
+      </article>
+      <article class="card">
+        <h2>Tickets SATI por duración</h2>
+        <canvas id="duracionChart" height="140"></canvas>
+      </article>
+
+      <article class="card">
+        <h2>Tickets SATI por tipo</h2>
+        <canvas id="tipoChart" height="140"></canvas>
+      </article>
+      <article class="card">
+        <h2>Tickets SATI por criticidad</h2>
+        <canvas id="criticidadChart" height="140"></canvas>
+      </article>
+
+      <article class="card">
+        <h2>Uso de licencias / usuarios</h2>
+        <canvas id="licenciasChart" height="160"></canvas>
+        <div class="note">Antivirus y HANSA reflejan datos parciales/operativos relevados al corte.</div>
+      </article>
+
+      <article class="card">
+        <h2>Resumen de licencias y usuarios</h2>
+        <table>
+          <thead>
+            <tr><th>Sistema</th><th>Total</th><th>En uso / Asignadas</th><th>Disponibles / Libres</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Antivirus</td><td>10 relevadas</td><td>7 en uso</td><td>3 libres</td></tr>
+            <tr><td>Google Workspace Standard</td><td>14</td><td>13 asignadas</td><td>1 disponible</td></tr>
+            <tr><td>Google Workspace Starter</td><td>36</td><td>34 asignadas</td><td>2 disponibles</td></tr>
+            <tr><td>Odoo</td><td>38 usuarios</td><td>36 activos</td><td>2 baja</td></tr>
+            <tr><td>HANSA</td><td>5 licencias</td><td>3 en uso</td><td>2 libres</td></tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+  </div>
+
+  <script>
+    const baseOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#e5e7eb' } }
+      },
+      scales: {
+        x: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(148,163,184,.18)' } },
+        y: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(148,163,184,.18)' }, beginAtZero: true }
+      }
+    };
+
+    new Chart(document.getElementById('estadoChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Finalizado', 'En proceso', 'Bloqueado', 'Pendiente', 'Cancelado'],
+        datasets: [{
+          label: 'Cantidad',
+          data: [24, 7, 10, 4, 1],
+          backgroundColor: ['#34d399', '#38bdf8', '#fbbf24', '#f87171', '#64748b']
+        }]
+      },
+      options: baseOptions
+    });
+
+    new Chart(document.getElementById('duracionChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['0-7 días', '8-30 días', '+30 días'],
+        datasets: [{ data: [22, 41, 37], backgroundColor: ['#34d399', '#38bdf8', '#fbbf24'] }]
+      },
+      options: { responsive: true, plugins: { legend: { labels: { color: '#e5e7eb' } } } }
+    });
+
+    new Chart(document.getElementById('tipoChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Error', 'Mejora/Consulta', 'Estratégico/Seguimiento'],
+        datasets: [{ label: '%', data: [73, 19, 8], backgroundColor: ['#fbbf24', '#38bdf8', '#34d399'] }]
+      },
+      options: { ...baseOptions, scales: { ...baseOptions.scales, y: { ...baseOptions.scales.y, max: 100 } } }
+    });
+
+    new Chart(document.getElementById('criticidadChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Crítica', 'Alta', 'Media/Baja'],
+        datasets: [{ label: '%', data: [40, 33, 27], backgroundColor: ['#f87171', '#fbbf24', '#34d399'] }]
+      },
+      options: { ...baseOptions, scales: { ...baseOptions.scales, y: { ...baseOptions.scales.y, max: 100 } } }
+    });
+
+    new Chart(document.getElementById('licenciasChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Antivirus', 'WS Standard', 'WS Starter', 'Odoo activos', 'HANSA'],
+        datasets: [
+          { label: 'Total', data: [10, 14, 36, 38, 5], backgroundColor: '#334155' },
+          { label: 'En uso/asignadas', data: [7, 13, 34, 36, 3], backgroundColor: '#38bdf8' }
+        ]
+      },
+      options: baseOptions
+    });
+  </script>
+</body>
+</html>
