@@ -48,7 +48,7 @@
             font-family: "Inter", "Segoe UI", "Roboto", Arial, sans-serif;
             color: var(--text);
             background: radial-gradient(circle at 50% 50%, #0d1e38 0%, var(--bg-primary) 70%, #02060d 100%);
-            font-size: 24px; /* Tamaño base congelado */
+            font-size: 24px; 
         }
 
         .reveal .slides section {
@@ -73,7 +73,7 @@
         }
 
         /* =========================================
-           PORTADA (Posicionamiento Absoluto Estricto)
+           PORTADA - CENTRADO ABSOLUTO
            ========================================= */
         .cover-header {
             position: absolute;
@@ -111,10 +111,15 @@
         .cover-main {
             position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
             text-align: center;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .super-title {
@@ -124,6 +129,8 @@
             text-transform: uppercase !important;
             margin-bottom: 15px !important;
             font-weight: 600;
+            width: 100%;
+            text-align: center;
         }
 
         .main-title {
@@ -131,6 +138,8 @@
             font-weight: 700 !important;
             margin-bottom: 20px !important;
             color: #ffffff;
+            width: 100%;
+            text-align: center;
         }
 
         .title-divider {
@@ -141,13 +150,14 @@
             border-radius: 2px;
         }
 
-.cover-desc {
-    font-size: 22px !important;
-    color: var(--muted);
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center; /* 👈 FALTABA ESTO */
-}
+        .cover-desc {
+            font-size: 22px !important;
+            color: var(--muted);
+            max-width: 850px;
+            margin: 0 auto !important;
+            text-align: center !important;
+            display: block;
+        }
 
         .cover-badge-container {
             display: flex; 
@@ -160,7 +170,7 @@
             background: rgba(255,255,255,0.03); 
             border-radius: 12px; 
             border: 1px solid rgba(255,255,255,0.05); 
-            max-width: 700px;
+            width: fit-content;
         }
 
         .cover-footer {
@@ -176,7 +186,6 @@
         /* =========================================
            SLIDES INTERIORES
            ========================================= */
-
         .slide-header-title {
             display: flex;
             align-items: center;
@@ -226,6 +235,7 @@
             width: 100%;
         }
         .kpi-grid.four-cols { grid-template-columns: repeat(4, 1fr); }
+        .kpi-grid.five-cols { grid-template-columns: repeat(5, 1fr); }
 
         .kpi-card {
             background-color: transparent;
@@ -256,7 +266,7 @@
             letter-spacing: 1px;
         }
 
-        /* Barras de progreso - TAMAÑOS CONGELADOS PARA NO SALTAR LÍNEA */
+        /* Barras de progreso */
         .progress-row {
             display: flex;
             align-items: center;
@@ -266,7 +276,7 @@
         }
 
         .progress-label {
-            width: 140px; /* Suficiente para "Finalizadas" */
+            width: 140px; 
             font-size: 18px;
             color: #ffffff;
             flex-shrink: 0;
@@ -275,15 +285,15 @@
 
         .progress-track {
             flex-grow: 1;
-            height: 10px;
+            height: 12px;
             background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
+            border-radius: 6px;
             overflow: hidden;
         }
-        .progress-fill { height: 100%; border-radius: 5px; }
+        .progress-fill { height: 100%; border-radius: 6px; }
 
         .progress-value {
-            width: 50px;
+            width: 60px;
             text-align: right;
             font-size: 18px;
             color: var(--muted);
@@ -298,9 +308,7 @@
             font-size: 18px;
             width: 100%;
         }
-        .mini-progress-row span {
-            width: 80px;
-        }
+
         .mini-progress-track {
             flex-grow: 1;
             height: 8px;
@@ -312,7 +320,6 @@
         .flex-split { display: flex; gap: 20px; width: 100%; }
         .flex-split > div { flex: 1; }
 
-        /* Tablas */
         .custom-table {
             width: 100%;
             border-collapse: collapse;
@@ -331,9 +338,7 @@
             font-weight: 600;
             background-color: rgba(255, 255, 255, 0.02);
         }
-        .custom-table td { color: var(--text); }
 
-        /* Alertas */
         .alert-box {
             background-color: rgba(251, 191, 36, 0.05);
             border: 1px solid rgba(251, 191, 36, 0.4);
@@ -356,16 +361,6 @@
         .bg-accent-2 { background-color: var(--accent-2) !important; }
         .bg-accent { background-color: var(--accent) !important; }
         .bg-warn { background-color: var(--warn) !important; }
-
-
-        section .cover-desc {
-    font-size: 22px !important;
-    color: var(--muted);
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center !important;
-    display: block;
-}
     </style>
 </head>
 <body>
@@ -373,15 +368,14 @@
     <div class="reveal">
         <div class="slides">
 
-            <!-- Diapositiva 0: PORTADA UNIFICADA -->
+            <!-- Diapositiva 0: PORTADA UNIFICADA (CENTRADO CORREGIDO) -->
             <section data-transition="fade">
-                
                 <div class="cover-header">
                     <div class="logo">
                         <i class="fa-solid fa-cube"></i> CAMPING 44 <span>S.A.</span>
                     </div>
                     <div class="header-meta">
-                        <span><i class="fa-regular fa-clock"></i> 24 de abril de 2026</span>
+                        <span><i class="fa-regular fa-clock"></i> 30 de abril de 2026</span>
                         <span style="color: rgba(255,255,255,0.1);">|</span>
                         <span><i class="fa-solid fa-network-wired"></i> Área IT</span>
                     </div>
@@ -392,16 +386,16 @@
                     <h1 class="main-title">Reporte de Gestión IT</h1>
                     <div class="title-divider"></div>
                     
-                    <p class="cover-desc" style="text-align: center;">
-                        Presentación de resultados, estado operativo, riesgos y plan estratégico del área.<br>
-                        <strong style="color: #fff; margin-top: 10px; display: block; text-align: center;">Período: Noviembre 2025 - Abril 2026</strong>
+                    <p class="cover-desc">
+                        Presentación de resultados, estado operativo, riesgos y plan estratégico del área.
                     </p>
+                    <strong style="color: #fff; margin-top: 10px; font-size: 22px; display: block; text-align: center;">Período: Noviembre 2025 - Abril 2026</strong>
 
                     <div class="cover-badge-container">
                         <span style="color: var(--accent);"><i class="fa-regular fa-calendar" style="margin-right: 8px;"></i> Abril 2026</span>
-                        <span style="color: rgba(255,255,255,0.1);">|</span>
+                        <span style="color: rgba(255,255,255,0.1); margin: 0 10px;">|</span>
                         <span><i class="fa-solid fa-user-gear" style="color: var(--muted); margin-right: 8px;"></i> Responsable IT único</span>
-                        <span style="color: rgba(255,255,255,0.1);">|</span>
+                        <span style="color: rgba(255,255,255,0.1); margin: 0 10px;">|</span>
                         <span><i class="fa-solid fa-server" style="color: var(--muted); margin-right: 8px;"></i> Odoo ERP <span style="color:var(--muted)">•</span> Google Workspace</span>
                     </div>
                 </div>
@@ -409,7 +403,6 @@
                 <div class="cover-footer">
                     <i class="fa-solid fa-shield-halved" style="color: var(--accent); margin-right: 5px;"></i> Información confidencial <span style="color: rgba(255,255,255,0.1); margin: 0 10px;">|</span> Uso interno exclusivo
                 </div>
-
             </section>
 
             <!-- Diapositiva 1: Resumen de Gestión -->
@@ -418,12 +411,12 @@
                     <i class="fa-solid fa-timeline text-white"></i> Resumen de Gestión (Nov 2025 - Abr 2026)
                 </h2>
                 
-                <p>Principales hitos alcanzados desde el ingreso al área IT (18/11/2025 al 23/04/2026):</p>
+                <p>Principales hitos alcanzados desde el ingreso al área IT (18/11/2025 al 30/04/2026):</p>
 
                 <div class="card" style="margin-top: 20px;">
                     <ul>
                         <li><span class="font-semibold text-white">Estabilización de Infraestructura:</span> Diagnóstico de servidores (actualmente estables) y levantamiento de riesgos en cableado físico.</li>
-                        <li><span class="font-semibold text-white">Gobernanza y Seguridad:</span> Auditoría de licencias corporativas, <strong>aprobación del Manual de Seguridad</strong> e implementación de <strong>políticas de control de activos</strong>.</li>
+                        <li><span class="font-semibold text-white">Gobernanza y Seguridad:</span> Auditoría de licencias y <strong>aprobación del Manual de Seguridad (14/04/2026)</strong> con políticas de control de activos.</li>
                         <li><span class="font-semibold text-white">Organización Interna IT:</span> <strong>Implementación de un sistema de tickets internos</strong> para un mejor control, trazabilidad y resolución de requerimientos.</li>
                         <li><span class="font-semibold text-white">Gestión de Proveedores:</span> Licitaciones formales para la Sala de Servidores y evaluación de nuevos partners para Odoo ERP.</li>
                         <li><span class="font-semibold text-white">Visibilidad Operativa:</span> Seguimiento de tickets SATI y generación de KPIs ejecutivos para medir tiempos y cuellos de botella.</li>
@@ -454,7 +447,7 @@
                         <h3><i class="fa-solid fa-shield-halved"></i> Seguridad y Gobernanza</h3>
                         <ul>
                             <li>Auditoría de accesos y seguridad TI.</li>
-                            <li>Documentación ISO y <span class="text-white font-semibold">Manual de Seguridad Informática</span>.</li>
+                            <li><span class="text-white font-semibold">Manual de Seguridad Informática</span> (MP-APY-07) aprobado.</li>
                             <li><span class="text-white font-semibold">Políticas:</span> Notas de compromiso de equipos y formularios de altas/bajas.</li>
                             <li>Creación de Espacios Chat y <span class="text-white font-semibold">Ticket Interno IT</span>.</li>
                         </ul>
@@ -480,52 +473,53 @@
                 </div>
             </section>
 
-            <!-- Diapositiva 3: Realidad del Área IT (Crudo y Real) -->
+            <!-- Diapositiva 3: Realidad del Área IT -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
                     <i class="fa-solid fa-weight-hanging text-white"></i> Realidad Operativa del Área IT
                 </h2>
 
-                <p style="margin-bottom: 20px;">El área IT no es solo soporte; es el <strong>motor transversal</strong> que sostiene la operación comercial, logística y administrativa entera.</p>
+                <p style="margin-bottom: 20px;">El área IT es el <strong>motor transversal</strong> que sostiene la operación comercial, logística y administrativa entera.</p>
 
                 <div class="grid-2" style="margin-top: 10px; gap: 15px;">
                     <div class="card" style="padding: 15px 20px;">
                         <h3 style="font-size: 20px; margin-bottom: 10px;"><i class="fa-solid fa-server text-accent"></i> Infraestructura Crítica</h3>
                         <ul style="font-size: 17px; line-height: 1.4;">
-                            <li>Mantenimiento de <strong class="text-white">5 servidores físicos</strong>. Si fallan, se detiene la empresa.</li>
+                            <li>Mantenimiento de <strong class="text-white">5 servidores físicos</strong> esenciales.</li>
                             <li><strong class="text-warn">Riesgo Físico Real:</strong> Vulnerabilidad extrema por desorden histórico en cableados y rack.</li>
-                            <li>Gestión y monitoreo constante de redes y conectividad en todas las áreas.</li>
+                            <li>Gestión y monitoreo constante de redes y conectividad.</li>
                         </ul>
                     </div>
                     
                     <div class="card" style="padding: 15px 20px;">
                         <h3 style="font-size: 20px; margin-bottom: 10px;"><i class="fa-solid fa-code-branch text-accent"></i> Ecosistema ERP y Facturación</h3>
                         <ul style="font-size: 17px; line-height: 1.4;">
-                            <li><strong class="text-white">Dependencia Absoluta de Odoo:</strong> Motor del inventario, logística y ventas.</li>
-                            <li>Resolución diaria de bloqueos de sistema (SATI, SIFEN, XML) que frenan la facturación.</li>
-                            <li>Administración de entorno Google Workspace (47 cuentas corporativas).</li>
+                            <li><strong class="text-white">Dependencia Absoluta de Odoo:</strong> Motor de ventas y logística.</li>
+                            <li>Resolución diaria de bloqueos (SATI, SIFEN, XML) que frenan la facturación.</li>
+                            <li>Administración de 47 cuentas Google Workspace.</li>
                         </ul>
                     </div>
 
                     <div class="card" style="padding: 15px 20px;">
                         <h3 style="font-size: 20px; margin-bottom: 10px;"><i class="fa-solid fa-headset text-accent"></i> Soporte Técnico (Help Desk)</h3>
                         <ul style="font-size: 17px; line-height: 1.4;">
-                            <li>Atención ininterrumpida a <strong class="text-white">más de 38 usuarios activos</strong> con incidencias diarias.</li>
-                            <li>Mantenimiento de más de 40 equipos (notebooks, PCs, impresoras, monitores).</li>
-                            <li>Configuración y control absoluto de <strong class="text-white">45 celulares corporativos</strong>.</li>
+                            <li>Atención ininterrumpida a <strong class="text-white">más de 38 usuarios activos</strong>.</li>
+                            <li>Mantenimiento de más de 40 equipos físicos.</li>
+                            <li>Configuración y control de <strong class="text-white">45 celulares corporativos</strong>.</li>
                         </ul>
                     </div>
 
                     <div class="card" style="padding: 15px 20px;">
-                        <h3 style="font-size: 20px; margin-bottom: 10px;"><i class="fa-solid fa-shield-virus text-accent"></i> Seguridad, E-Commerce y BI</h3>
+                        <h3 style="font-size: 20px; margin-bottom: 10px;"><i class="fa-solid fa-shield-virus text-accent"></i> Seguridad y BI</h3>
                         <ul style="font-size: 17px; line-height: 1.4;">
                             <li>Desarrollo y soporte continuo de la web <strong class="text-white">Vitalica</strong>.</li>
-                            <li>Inteligencia de Negocios (BI): Creación de reportes gerenciales en <strong>Looker Studio</strong>.</li>
-                            <li>Defensa de activos: Imposición de altas/bajas seguras y control de hardware.</li>
+                            <li>Inteligencia de Negocios: Reportes en <strong>Looker Studio</strong>.</li>
+                            <li>Defensa de activos: Altas/bajas seguras y control de hardware.</li>
                         </ul>
                     </div>
                 </div>
             </section>
+
             <!-- Diapositiva 4: Nuevo Manual de Seguridad -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
@@ -534,40 +528,42 @@
                 
                 <p>Normativa <strong>MP-APY-07</strong> aprobada y vigente desde el <strong>14 de abril de 2026</strong>.</p>
 
-                <div class="card" style="margin-top: 15px; border-left: 8px solid var(--accent-dark); background: rgba(56, 189, 248, 0.05);">
-                    <h3 style="color: #ffffff; display: flex; align-items: center; gap: 15px; font-size: 28px;">
-                        <i class="fa-solid fa-key text-accent" style="font-size: 36px;"></i> 
-                        FOCO CRÍTICO: Doble Factor de Autenticación (2FA)
-                    </h3>
-                    <p style="font-size: 22px; color: #ffffff; margin-top: 10px;">
-                        Según el punto <strong>1.3 del manual</strong>, es <strong>OBLIGATORIO</strong> que cada colaborador active la autenticación de doble factor en sus cuentas corporativas (Google, Odoo, etc).
-                    </p>
-                    <div class="alert-box" style="margin-top: 10px; background: rgba(52, 211, 153, 0.1); border-color: var(--accent-2); color: var(--accent-2);">
-                        <i class="fa-solid fa-circle-check"></i> El 2FA es la barrera principal contra el acceso no autorizado y robo de identidad.
+                <div class="card" style="margin-top: 15px; border: 2px solid var(--accent); background: rgba(56, 189, 248, 0.1); position: relative; overflow: hidden;">
+                    <div style="display: flex; align-items: center; gap: 30px;">
+                        <div style="background: var(--accent); color: var(--bg-primary); width: 80px; height: 80px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-key" style="font-size: 40px;"></i>
+                        </div>
+                        <div>
+                            <h3 style="color: #ffffff; margin-bottom: 5px; border: none; padding: 0; font-size: 26px;">FOCO CRÍTICO: Autenticación de Doble Factor (2FA)</h3>
+                            <p style="font-size: 20px; color: #ffffff; margin: 0;">
+                                Según el punto <strong>1.3 del manual</strong>, es <strong>OBLIGATORIO</strong> activar el 2FA en todas las cuentas corporativas (Google, Odoo). 
+                                <span class="text-accent-2 font-semibold">Protección inmediata contra robo de identidad.</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="grid-2" style="margin-top: 15px;">
-                    <div class="card" style="padding: 15px;">
-                        <h3 style="font-size: 18px; margin-bottom: 8px;"><i class="fa-solid fa-ban text-danger"></i> Prohibiciones Clave</h3>
-                        <ul style="font-size: 16px;">
-                            <li>Uso de herramientas de <strong>Inteligencia Artificial (IA)</strong> con datos corporativos (Punto 1.5).</li>
-                            <li>Instalación de software externo no autorizado.</li>
-                            <li>Resguardo de información en dispositivos personales.</li>
+                <div class="grid-2" style="margin-top: 20px;">
+                    <div class="card" style="padding: 20px;">
+                        <h3 style="font-size: 20px; margin-bottom: 12px;"><i class="fa-solid fa-ban text-danger" style="margin-right: 10px;"></i> Prohibiciones Clave</h3>
+                        <ul style="font-size: 17px; line-height: 1.4;">
+                            <li><span class="text-white font-semibold">IA Corporativa:</span> Prohibido el uso de herramientas de IA con datos de la empresa (Punto 1.5).</li>
+                            <li><span class="text-white font-semibold">Software Externo:</span> Prohibida la instalación de programas no autorizados por IT.</li>
+                            <li><span class="text-white font-semibold">Resguardo Personal:</span> Prohibido almacenar datos en dispositivos personales.</li>
                         </ul>
                     </div>
-                    <div class="card" style="padding: 15px;">
-                        <h3 style="font-size: 18px; margin-bottom: 8px;"><i class="fa-solid fa-user-shield text-accent"></i> Responsabilidades</h3>
-                        <ul style="font-size: 16px;">
-                            <li><strong>Mínimo Privilegio:</strong> Accesos otorgados estrictamente según el rol.</li>
-                            <li>Reporte inmediato de cualquier anomalía sospechosa.</li>
-                            <li>Auditorías periódicas de acceso realizadas por IT.</li>
+                    <div class="card" style="padding: 20px;">
+                        <h3 style="font-size: 20px; margin-bottom: 12px;"><i class="fa-solid fa-user-shield text-accent-2" style="margin-right: 10px;"></i> Responsabilidades</h3>
+                        <ul style="font-size: 17px; line-height: 1.4;">
+                            <li><span class="text-white font-semibold">Mínimo Privilegio:</span> Permisos otorgados estrictamente por necesidad del rol.</li>
+                            <li><span class="text-white font-semibold">Reporte Obligatorio:</span> Notificación inmediata de anomalías sospechosas.</li>
+                            <li><span class="text-white font-semibold">Auditorías:</span> Monitoreo periódico de accesos y cuentas activas.</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Diapositiva 4: Licencias y Usuarios -->
+            <!-- Diapositiva 5: Licencias y Usuarios -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
                     <i class="fa-solid fa-id-badge text-white"></i> Licencias y Usuarios (Control IT)
@@ -610,7 +606,7 @@
                 </div>
             </section>
 
-            <!-- Diapositiva 5: Inventario Tecnológico -->
+            <!-- Diapositiva 6: Inventario Tecnológico -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
                     <i class="fa-solid fa-desktop text-white"></i> Inventario Tecnológico (Hardware)
@@ -657,103 +653,120 @@
                 </div>
             </section>
 
-            <!-- Diapositiva 6: Tickets Internos IT -->
+            <!-- Diapositiva 7: Tickets Internos IT -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
                     <i class="fa-solid fa-ticket-simple text-white"></i> Sistema de Tickets Internos IT
                 </h2>
                 
-                <p>Implementación oficial lanzada el <strong>viernes 17 de abril de 2026</strong>.</p>
+                <p>Estado operativo desde su lanzamiento el <strong>17 de abril de 2026</strong>.</p>
 
-                <div class="kpi-grid" style="margin-top: 30px; margin-bottom: 30px;">
+                <div class="kpi-grid five-cols" style="margin-top: 20px; margin-bottom: 25px;">
                     <div class="kpi-card">
-                        <div class="kpi-value">5</div>
-                        <div class="kpi-label">TICKETS REGISTRADOS</div>
+                        <div class="kpi-value">8</div>
+                        <div class="kpi-label">TICKETS TOTALES</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-value" style="color: var(--accent-2);">3</div>
-                        <div class="kpi-label">SOPORTE HARDWARE</div>
+                        <div class="kpi-label">HARDWARE</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-value" style="color: var(--accent);">2</div>
-                        <div class="kpi-label">ACCESOS Y PERMISOS</div>
+                        <div class="kpi-label">ACCESOS</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" style="color: var(--danger);">2</div>
+                        <div class="kpi-label">ODOO</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" style="color: var(--warn);">1</div>
+                        <div class="kpi-label">OTROS</div>
                     </div>
                 </div>
 
-                <div class="card" style="padding: 25px 30px;">
-                    <h3 style="margin-bottom: 15px; font-size: 24px;"><i class="fa-solid fa-bolt text-warn" style="margin-right: 10px;"></i> Justificación y Beneficios</h3>
-                    <ul style="line-height: 1.6;">
-                        <li><span class="font-semibold text-white">Orden y Control Efectivo:</span> Los trabajos son ahora mucho más ordenados, medibles y controlables.</li>
-                        <li><span class="font-semibold text-white">Priorización Real:</span> Permite clasificar y atender los casos críticos verdaderos como <strong>prioridad urgente</strong>.</li>
-                        <li><span class="font-semibold text-white">Base de Conocimiento:</span> Se deja un registro (log) documentado para optimizar drásticamente el tiempo de resolución si el mismo problema vuelve a ocurrir en un futuro.</li>
-                    </ul>
+                <div class="grid-2" style="gap: 15px;">
+                    <div class="card" style="padding: 15px 20px;">
+                        <h3 style="font-size: 20px; margin-bottom: 10px;"><i class="fa-solid fa-check-double text-accent-2"></i> Estado de Resolución</h3>
+                        <ul style="font-size: 16px; line-height: 1.4;">
+                            <li><span class="text-white">Resueltos:</span> 5 tickets (SLA cumplido).</li>
+                            <li><span class="text-white">Pendientes:</span> 3 tickets (En análisis / Proveedor).</li>
+                            <li><span class="text-white">Prioridades Críticas:</span> 3 (Odoo y Hardware de salón).</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="padding: 15px 20px;">
+                        <h3 style="font-size: 20px; margin-bottom: 10px;"><i class="fa-solid fa-chart-line text-accent"></i> Beneficios de Gestión</h3>
+                        <ul style="font-size: 16px; line-height: 1.4;">
+                            <li><span class="text-white">Orden:</span> Registro histórico para optimizar tiempos futuros.</li>
+                            <li><span class="text-white">Control:</span> Identificación inmediata de cuellos de botella.</li>
+                            <li><span class="text-white">Priorización:</span> Foco en casos urgentes para no detener la operación.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
-            <!-- Diapositiva 7: Políticas y Control Interno -->
+            <!-- Diapositiva 8: Políticas y Control Interno -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
                     <i class="fa-solid fa-file-signature text-white"></i> Gobernanza y Control Interno
                 </h2>
                 
-                <p>Implementación de normativas documentales para la gestión de activos y accesos corporativos.</p>
+                <p>Implementación de normativas documentales para activos y accesos.</p>
 
                 <div class="grid-2" style="margin-top: 30px;">
                     <div class="card" style="padding: 25px;">
                         <h3 style="margin-bottom: 15px; font-size: 24px;"><i class="fa-solid fa-laptop-medical text-accent" style="margin-right: 10px;"></i> Asignación de Activos</h3>
                         <ul style="line-height: 1.6;">
-                            <li><span class="font-semibold text-white">Notas de Compromiso:</span> Documentación formal y obligatoria para la entrega de dispositivos móviles y notebooks a colaboradores.</li>
-                            <li><span class="font-semibold text-white">Uso Externo:</span> Notas de autorización y compromiso explícito para retirar y utilizar equipos informáticos fuera de las instalaciones de la empresa.</li>
+                            <li><span class="font-semibold text-white">Notas de Compromiso:</span> Obligatorias para entrega de notebooks y móviles.</li>
+                            <li><span class="font-semibold text-white">Uso Externo:</span> Autorización explícita para uso fuera de instalaciones.</li>
                         </ul>
                     </div>
 
                     <div class="card" style="padding: 25px;">
                         <h3 style="margin-bottom: 15px; font-size: 24px;"><i class="fa-solid fa-user-check text-accent" style="margin-right: 10px;"></i> Gestión de Identidades</h3>
                         <ul style="line-height: 1.6;">
-                            <li><span class="font-semibold text-white">Altas de Usuario:</span> Procedimiento estándar con formularios para la creación de accesos y cuentas ante el ingreso de nuevos colaboradores.</li>
-                            <li><span class="font-semibold text-white">Bajas de Usuario:</span> Protocolo de bloqueo inmediato de credenciales y recuperación de activos tecnológicos al finalizar el vínculo laboral.</li>
+                            <li><span class="font-semibold text-white">Altas/Bajas:</span> Procedimiento estándar para creación de cuentas y desvinculación inmediata.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="alert-box" style="margin-top: 20px; background-color: rgba(56, 189, 248, 0.05); border-color: rgba(56, 189, 248, 0.4); color: var(--text);">
-                    <i class="fa-solid fa-bullseye text-accent"></i> <strong class="text-accent">Objetivo Estratégico:</strong> Mantener un estricto control interno del inventario tecnológico, garantizar la trazabilidad y fomentar un alto sentido de responsabilidad en los colaboradores.
+                    <i class="fa-solid fa-bullseye text-accent"></i> <strong class="text-accent">Objetivo:</strong> Garantizar trazabilidad y fomentar responsabilidad en los colaboradores.
                 </div>
             </section>
 
-            <!-- Diapositiva 8: KPIs Ejecutivos -->
+            <!-- Diapositiva 9: KPIs Ejecutivos -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
                     <i class="fa-solid fa-chart-line text-white"></i> KPIs Ejecutivos del Mes
                 </h2>
                 
-                <p>Corte operativo: 23/04/2026 (fuente: planilla de tareas IT compartida).</p>
+                <p>Corte operativo: 30/04/2026 (fuente: planilla de control de 50 tareas IT).</p>
 
                 <div class="kpi-grid" style="margin-top: 30px; margin-bottom: 30px;">
                     <div class="kpi-card">
-                        <div class="kpi-value">24</div>
+                        <div class="kpi-value" style="color: var(--accent-2);">29</div>
                         <div class="kpi-label">FINALIZADAS</div>
                     </div>
                     <div class="kpi-card">
-                        <div class="kpi-value">10</div>
+                        <div class="kpi-value" style="color: var(--warn);">12</div>
                         <div class="kpi-label">BLOQUEADAS</div>
                     </div>
                     <div class="kpi-card">
-                        <div class="kpi-value">38,08%</div>
-                        <div class="kpi-label">AVANCE ERP</div>
+                        <div class="kpi-value">39,80%</div>
+                        <div class="kpi-label">AVANCE ODOO ERP</div>
                     </div>
                 </div>
 
                 <div class="card" style="padding: 25px 30px;">
                     <div class="progress-row">
                         <div class="progress-label">Finalizadas</div>
-                        <div class="progress-track"><div class="progress-fill bg-accent-2" style="width: 52%;"></div></div>
-                        <div class="progress-value">52%</div>
+                        <div class="progress-track"><div class="progress-fill bg-accent-2" style="width: 59%;"></div></div>
+                        <div class="progress-value">59%</div>
                     </div>
                     <div class="progress-row">
                         <div class="progress-label">En proceso</div>
-                        <div class="progress-track"><div class="progress-fill bg-accent" style="width: 15%;"></div></div>
-                        <div class="progress-value">15%</div>
+                        <div class="progress-track"><div class="progress-fill bg-accent" style="width: 8%;"></div></div>
+                        <div class="progress-value">8%</div>
                     </div>
                     <div class="progress-row" style="margin-bottom: 0;">
                         <div class="progress-label">Bloq. + Pend.</div>
@@ -761,11 +774,15 @@
                         <div class="progress-value">33%</div>
                     </div>
                 </div>
+
+                <p style="font-size: 16px; color: var(--muted); margin-top: 15px; text-align: center;">
+                    *Muestreo basado en el portafolio activo de 50 ítems (excluyendo cancelados).
+                </p>
             </section>
 
-            <!-- Diapositiva 9: Dashboard SATI Unificado -->
+            <!-- Diapositiva 10: Dashboard SATI Unificado -->
             <section data-transition="slide">
-                <h2 class="slide-header-title">
+                <h2 class="slide-header-title" style="margin-bottom: 10px !important;">
                     <i class="fa-solid fa-chart-pie text-white"></i> Dashboard Soporte Odoo (SATI)
                 </h2>
 
@@ -840,45 +857,44 @@
                 </div>
 
                 <div class="alert-box">
-                    <i class="fa-solid fa-bolt"></i> <strong>ALTO RIESGO DE NEGOCIO:</strong> Patrón recurrente en errores fiscales (SIFEN, XML). La dependencia técnica y <strong>ausencia de SLA formal</strong> elevan el riesgo operativo.
+                    <i class="fa-solid fa-bolt"></i> <strong>ALTO RIESGO DE NEGOCIO:</strong> Patrón recurrente en errores fiscales. La <strong>ausencia de SLA formal</strong> eleva el riesgo operativo.
                 </div>
             </section>
 
-            <!-- Diapositiva 10: SITUACIÓN CONTRACTUAL SATI (NUEVA) -->
+            <!-- Diapositiva 11: Situación Contractual SATI -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
-                    <i class="fa-solid fa-file-contract text-white"></i> Situación Contractual SATI (Riesgo Inminente)
+                    <i class="fa-solid fa-file-contract text-white"></i> Situación Contractual SATI
                 </h2>
                 
-                <p>Actualización crítica sobre el estado del soporte del ERP (Odoo) a partir de Mayo 2026.</p>
+                <p>Conflicto sobre el soporte del ERP a partir de Mayo 2026.</p>
 
                 <div class="grid-2" style="margin-top: 15px;">
                     <div class="card" style="border-color: rgba(248, 113, 113, 0.4);">
-                        <h3 style="color: var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i> Notificación Unilateral (SATI)</h3>
+                        <h3 style="color: var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i> Notificación SATI</h3>
                         <ul style="font-size: 18px;">
-                            <li>Intento de modificación sustancial del contrato vigente (suscrito en Oct 2025).</li>
-                            <li>Paso de un fee fijo con cobertura amplia a un <strong>esquema de bolsa de horas mensuales</strong> (no acumulables).</li>
-                            <li>Cambio de obligación de <em>resolución</em> a simple <em>primera respuesta</em>.</li>
-                            <li>Eliminación unilateral de la visita mensual presencial.</li>
+                            <li>Intento de modificación unilateral del contrato.</li>
+                            <li>Paso a <strong>bolsa de horas</strong> (no acumulables).</li>
+                            <li>Eliminación de la visita mensual presencial.</li>
                         </ul>
                     </div>
 
                     <div class="card" style="border-color: rgba(56, 189, 248, 0.4);">
-                        <h3 style="color: var(--accent);"><i class="fa-solid fa-shield"></i> Postura Camping 44 S.A.</h3>
+                        <h3 style="color: var(--accent);"><i class="fa-solid fa-shield"></i> Postura de la Empresa</h3>
                         <ul style="font-size: 18px;">
-                            <li><strong>Rechazo formal</strong> emitido el 7 de abril de 2026 a las nuevas condiciones.</li>
-                            <li>Se exigió respeto al contrato vigente y que cualquier modificación sea por acuerdo bilateral.</li>
-                            <li>Reunión solicitada con representantes legales y operativos para defender los intereses de la empresa.</li>
+                            <li><strong>Rechazo formal</strong> emitido el 7 de abril.</li>
+                            <li>Se exige respeto al contrato vigente bilateral.</li>
+                            <li>Búsqueda urgente de alternativas de soporte.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="alert-box" style="background-color: rgba(248, 113, 113, 0.1); border-color: var(--danger); color: #ffffff; margin-top: 20px;">
-                    <i class="fa-solid fa-skull-crossbones text-danger" style="margin-right: 10px; font-size: 24px;"></i> <strong class="text-danger" style="font-size: 24px;">ALERTA MÁXIMA:</strong> Existe una posibilidad real de <strong>quedarnos sin soporte técnico de Odoo</strong> a corto plazo si SATI decide suspender el servicio. Esto acelera con carácter de urgencia la transición a un nuevo partner.
+                    <i class="fa-solid fa-skull-crossbones text-danger" style="margin-right: 10px;"></i> <strong class="text-danger">ALERTA:</strong> Riesgo de <strong>quedarnos sin soporte técnico</strong> a corto plazo.
                 </div>
             </section>
 
-            <!-- Diapositiva 11: Evaluación Partners -->
+            <!-- Diapositiva 12: Evaluación Partners -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
                     <i class="fa-solid fa-handshake text-white"></i> Evaluación de Nuevos Partners Odoo
@@ -888,124 +904,144 @@
                     <thead>
                         <tr>
                             <th style="width: 18%;">Proveedor</th>
-                            <th style="width: 35%;">Propuesta / Alcance</th>
-                            <th style="width: 30%;">Observación / Estado</th>
-                            <th style="width: 17%;">Inversión</th>
+                            <th style="width: 45%;">Propuesta / Alcance</th>
+                            <th style="width: 22%;">Estado / Perfil</th>
+                            <th style="width: 15%;">Inversión</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td class="font-semibold text-accent">INTERFACES</td>
                             <td>
-                                <strong>Opc 1:</strong> 180hs de soporte. Estabiliza el entorno.<br><br>
-                                <strong>Opc 2:</strong> Migración a V19 con nuevas localizaciones.
+                                <strong>Opción 1:</strong> Soporte + Mejora (180hs).<br>
+                                <strong>Opción 2:</strong> Reimplementación / Migración V19.
                             </td>
                             <td>
-                                <strong>Opc 1:</strong> Solo factible cambiando de partner.<br><br>
-                                <strong>Opc 2:</strong> Pendiente de relevamiento.
+                                <strong class="text-white">Gold Partner.</strong><br>Formalizado.
                             </td>
                             <td>
-                                Opc 1: <strong class="text-white">USD 6.300</strong><br>
-                                <span style="font-size: 14px; color: var(--muted);">(Contado)</span><br><br>
-                                Opc 2: <strong class="text-warn">A cotizar</strong>
+                                <strong class="text-white">USD 6.300</strong><br>
+                                <span style="font-size: 14px; color: var(--muted);">(Opción 1)</span>
                             </td>
                         </tr>
                         <tr>
                             <td class="font-semibold text-white">SEGEL</td>
                             <td>Soporte funcional Odoo + acompañamiento.</td>
-                            <td>Presupuesto recibido. Validar tiempos de respuesta.</td>
+                            <td>Presupuesto recibido.</td>
                             <td><strong class="text-white">USD 4.200</strong></td>
                         </tr>
                         <tr>
                             <td class="font-semibold text-white">CRITERIUM</td>
                             <td>Metodología de proyectos y mejora continua.</td>
-                            <td>Presupuesto recibido. Revisar alcance del SLA.</td>
+                            <td>Presupuesto recibido.</td>
                             <td><strong class="text-white">USD 2.000</strong></td>
                         </tr>
                         <tr>
                             <td class="font-semibold text-white">RUGERTEK</td>
                             <td>Alternativa técnica de evolución.</td>
-                            <td class="text-danger">Descartado. Sin localización de Odoo país.</td>
+                            <td class="text-danger">Descartado.</td>
                             <td><strong class="text-danger">N/A</strong></td>
                         </tr>
                     </tbody>
                 </table>
+            </section>
 
-                <div class="alert-box" style="margin-top: 10px; font-size: 16px;">
-                    <strong>Motivo del cambio:</strong> Inviabilidad técnica actual y riesgo inminente de pérdida de soporte por el conflicto contractual con SATI.
+            <!-- Diapositiva 13: Zoom Propuesta INTERFACES -->
+            <section data-transition="slide">
+                <h2 class="slide-header-title">
+                    <i class="fa-solid fa-magnifying-glass-chart text-white"></i> Propuesta Detallada: INTERFACES
+                </h2>
+                
+                <div class="grid-2">
+                    <!-- Opción 1 Detallada -->
+                    <div class="card" style="padding: 20px;">
+                        <h3 style="font-size: 20px; margin-bottom: 12px;"><i class="fa-solid fa-toolbox text-accent" style="margin-right: 10px;"></i> Opción 1: Soporte e Integral</h3>
+                        <ul style="font-size: 16px; line-height: 1.3;">
+                            <li><span class="text-white font-semibold">Costo:</span> USD 6.300 (Paquete 180hs).</li>
+                            <li><span class="text-white font-semibold">SLA Crítico:</span> Respuesta técnica en <strong class="text-accent-2">1 hora</strong>.</li>
+                            <li><span class="text-white font-semibold">Enfoque:</span> Estabilización de localizaciones actuales y resolución de errores acumulados.</li>
+                            <li><span class="text-white font-semibold">Mejora Continua:</span> Incluye capacitaciones y optimización de módulos existentes.</li>
+                            <li><span class="text-white font-semibold">Costo de Cambio:</span> USD 0 (Formalización inmediata).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Opción 2 Detallada -->
+                    <div class="card" style="padding: 20px;">
+                        <h3 style="font-size: 20px; margin-bottom: 12px;"><i class="fa-solid fa-arrows-rotate text-accent" style="margin-right: 10px;"></i> Opción 2: Reimplementación</h3>
+                        <ul style="font-size: 16px; line-height: 1.3;">
+                            <li><span class="text-white font-semibold">Inversión:</span> USD 35.200 a USD 52.800.</li>
+                            <li><span class="text-white font-semibold">Modernización:</span> Salto a V19 con localizaciones nativas de Interfaces (valoradas en ~$24k).</li>
+                            <li><span class="text-white font-semibold">Tiempos:</span> 4 a 6 meses de ejecución por fases operativas.</li>
+                            <li><span class="text-white font-semibold">Módulos:</span> Full suite (Ventas, POS, Contabilidad, RRHH, Almacén, etc).</li>
+                            <li><span class="text-danger font-semibold">Limitación:</span> Migra saldos de balance, pero <strong class="text-white">NO transacciones históricas</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert-box" style="margin-top: 15px; font-size: 17px;">
+                    <i class="fa-solid fa-info-circle text-accent"></i> <strong>Punto Clave:</strong> La Opción 1 permite salvaguardar la operación ante el conflicto con SATI sin una inversión masiva inicial, mientras que la Opción 2 resuelve la deuda técnica del sistema a largo plazo.
                 </div>
             </section>
 
-            <!-- Diapositiva 12: Cableado -->
+            <!-- Diapositiva 14: Comparativa Adecuación Sala -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
-                    <i class="fa-solid fa-network-wired text-white"></i> Presupuestos Cableado / Sala de Servidores
+                    <i class="fa-solid fa-network-wired text-white"></i> Comparativa: Adecuación Sala Técnica
                 </h2>
 
                 <div class="grid-2" style="grid-template-columns: 1.3fr 0.7fr; align-items: center; margin-top: 30px;">
-                    
                     <div>
                         <table class="custom-table" style="margin-top: 0;">
                             <thead>
                                 <tr>
-                                    <th style="width: 25%;">Proveedor</th>
-                                    <th style="width: 45%;">Alcance y Opciones</th>
-                                    <th style="width: 30%;">Costo</th>
+                                    <th style="width: 20%;">Proveedor</th>
+                                    <th style="width: 55%;">Alcance Destacado</th>
+                                    <th style="width: 25%;">Inversión (USD)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Cidicom</td>
-                                    <td>
-                                        <strong>Opc 1:</strong> Rack Abierto<br>
-                                        <strong>Opc 2:</strong> Rack Cerrado<br>
-                                        <span style="color: var(--muted); font-size: 14px; display: block; margin-top: 5px;">*Incluyen mudanza temporal a sala de reuniones por paredes.</span>
-                                    </td>
-                                    <td>
-                                        Opc 1: <strong class="text-white">USD 4.669</strong><br>
-                                        Opc 2: <strong class="text-white">USD 4.415</strong>
-                                    </td>
+                                    <td><strong>Cidicom</strong></td>
+                                    <td>Ordenamiento de cableado, rotulado y provisión de Rack (42U).</td>
+                                    <td>R. Abierto: <strong>4.669</strong><br>R. Cerrado: <strong>4.415</strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Celexx</td>
-                                    <td>Recableado estructurado y estandarización.</td>
-                                    <td><strong class="text-warn">Relevamiento:<br> Lunes 27/04</strong></td>
+                                    <td><strong>Celexx</strong></td>
+                                    <td>Adecuación integral: Rack, <strong>UPS 1kVA</strong>, PDU y <strong>Certificación de 64 puntos de red</strong>.</td>
+                                    <td>Total: <strong>5.820,83</strong><br><span style="font-size: 14px; color: var(--muted);">(IVA Incluido)</span></td>
                                 </tr>
                             </tbody>
                         </table>
-
-                        <div class="alert-box" style="margin-top: 20px;">
-                            Objetivo: reducir riesgo de caída operativa por desorden físico y falta de trazabilidad de red.
+                        <div class="alert-box" style="margin-top: 20px; border-color: var(--accent); background: rgba(56, 189, 248, 0.05); color: #fff;">
+                            <i class="fa-solid fa-info-circle text-accent"></i> <strong>Nota común:</strong> Ambas propuestas incluyen el servicio de <strong>mudanza temporal de equipos</strong> para permitir la reparación y pintura de paredes.
                         </div>
                     </div>
-
                     <div style="display: flex; flex-direction: column; justify-content: center; gap: 15px;">
-                        <img src="servidores1.jpeg" alt="[Imagen de Rack desordenado]" style="width: 100%; height: 210px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); margin: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-                        <img src="servidores2.jpeg" alt="[Imagen de Servidores]" style="width: 100%; height: 210px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); margin: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-                        <p style="text-align: center; margin: 0; color: var(--warn); font-size: 16px;"><i class="fa-solid fa-camera"></i> Estado actual de la sala</p>
+                        <img src="./servidores1.jpeg" alt="[Imagen de Rack]" style="width: 100%; height: 210px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); margin: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                        <img src="./servidores2.jpeg" alt="[Imagen de Servidores]" style="width: 100%; height: 210px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); margin: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                        <p style="text-align: center; margin: 0; color: var(--warn); font-size: 16px;"><i class="fa-solid fa-camera"></i> Estado actual Crítico</p>
                     </div>
-
                 </div>
             </section>
 
-            <!-- Diapositiva 13: Acción Operativa -->
+            <!-- Diapositiva 15: Acción Operativa -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
-                    <i class="fa-solid fa-calendar-check text-white"></i> Acción Operativa Programada: Costos Odoo
+                    <i class="fa-solid fa-calendar-check text-white"></i> Acción Operativa: Costos de Productos en Odoo
                 </h2>
 
                 <div class="card" style="margin-top: 40px; padding: 40px;">
-                    <ul>
-                        <li><span class="font-semibold text-white">Fecha confirmada:</span> sábado <span class="font-semibold text-white">25 de abril de 2026</span>, posterior al cierre.</li>
-                        <li><span class="font-semibold text-white">Actividad:</span> reseteo de costos de productos y carga de costos reales.</li>
-                        <li><span class="font-semibold text-white">Justificación:</span> dependencia de SATI desde enero sin respuesta viable.</li>
-                        <li><span class="font-semibold text-white">Control:</span> respaldo previo, registro de cambios y validación.</li>
-                        <li><span class="font-semibold text-white">Comunicación:</span> aviso a áreas sobre ventana de pruebas del lunes.</li>
+                    <ul style="line-height: 1.8;">
+                        <li><span class="font-semibold text-white">Fecha confirmada:</span> lunes <span class="font-semibold text-white">4 de mayo de 2026</span>.</li>
+                        <li><span class="font-semibold text-white">Actividad:</span> Reunión estratégica presencial con el partner SATI para abordar la regularización de costos de productos.</li>
+                        <li><span class="font-semibold text-white">Reparación Técnica:</span> Se procederá a realizar la corrección y el ajuste de valorización directamente durante la sesión de trabajo.</li>
+                        <li><span class="font-semibold text-white">Justificación:</span> Necesidad crítica de subsanar las discrepancias en la carga de costos para asegurar la integridad de los informes financieros.</li>
+                        <li><span class="font-semibold text-white">Protocolo de Control:</span> Ejecución de respaldo integral previo y validación exhaustiva de datos finalizada la sesión.</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Diapositiva 14: Cierre -->
+            <!-- Diapositiva 16: Cierre -->
             <section data-transition="slide">
                 <h2 class="slide-header-title">
                     <i class="fa-solid fa-flag-checkered text-white"></i> Cierre y Dirección Estratégica
@@ -1019,15 +1055,11 @@
                         </li>
                         <li style="margin-bottom: 25px;">
                             <strong class="text-white" style="font-size: 24px;"><i class="fa-solid fa-lock text-accent" style="margin-right: 15px;"></i>Seguridad y estandarización:</strong><br>
-                            <span style="color: var(--muted); padding-left: 45px; display: block;">Aplicación estricta del Manual de Seguridad y proyecto de sala de servidores.</span>
+                            <span style="color: var(--muted); padding-left: 45px; display: block;">Aplicación estricta del Manual de Seguridad y ejecución del proyecto de sala técnica.</span>
                         </li>
                         <li style="margin-bottom: 25px;">
                             <strong class="text-white" style="font-size: 24px;"><i class="fa-solid fa-chart-line text-accent" style="margin-right: 15px;"></i>Alineación de IT:</strong><br>
-                            <span style="color: var(--muted); padding-left: 45px; display: block;">Entregar herramientas BI (Looker Studio) a gerencias para decisiones basadas en datos.</span>
-                        </li>
-                        <li>
-                            <strong class="text-white" style="font-size: 24px;"><i class="fa-solid fa-bullseye text-accent" style="margin-right: 15px;"></i>Próximo paso:</strong><br>
-                            <span style="color: var(--muted); padding-left: 45px; display: block;">Medición constante mediante Acuerdos de Nivel de Servicio (SLA) y tickets.</span>
+                            <span style="color: var(--muted); padding-left: 45px; display: block;">Continuar proveyendo herramientas BI (Looker Studio) para la toma de decisiones basada en datos.</span>
                         </li>
                     </ul>
                 </div>
@@ -1039,7 +1071,6 @@
     <!-- Scripts de Reveal.js -->
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
     <script>
-        // CONFIGURACIÓN DE ESCALADO FIJO A 720p HD (Garantiza responsividad)
         Reveal.initialize({
             hash: true,
             controls: true,
