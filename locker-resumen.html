@@ -37,6 +37,27 @@
     }
     h1 { margin: 0; font-size: 28px; }
     .sub { color: var(--muted); margin-top: 4px; font-size: 14px; }
+
+    /* Estilo de la Alerta Crítica */
+    .alert-banner {
+      background: rgba(248, 113, 113, 0.15);
+      border: 1px solid var(--danger);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      animation: pulse-border 2s infinite;
+    }
+    @keyframes pulse-border {
+      0% { box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(248, 113, 113, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(248, 113, 113, 0); }
+    }
+    .alert-icon { font-size: 24px; }
+    .alert-content b { color: var(--danger); display: block; margin-bottom: 4px; font-size: 16px; }
+    .alert-content p { margin: 0; font-size: 13.5px; line-height: 1.4; color: #fca5a5; }
     
     .kpis {
       display: grid; grid-template-columns: repeat(5, minmax(140px, 1fr)); gap: 10px; margin: 12px 0;
@@ -122,6 +143,14 @@
       <div>
         <h1>Dashboard Portafolio IT</h1>
         <div class="sub">Camping 44 S.A. / Vitalica · Resumen Ejecutivo · Corte: 11/05/2026</div>
+      </div>
+    </div>
+
+    <div class="alert-banner">
+      <div class="alert-icon">🚨</div>
+      <div class="alert-content">
+        <b>INCIDENCIA CRÍTICA: SISTEMA HANSA FUERA DE SERVICIO</b>
+        <p>Tormenta del 07/05 provocó cortocircuito y quema de discos del servidor. Se recuperó backup, pero se requiere instalador de versión específica. Gestión activa con Hansa Internacional para restablecimiento del servicio durante la jornada de hoy.</p>
       </div>
     </div>
 
@@ -287,7 +316,7 @@
             <td>TI-0009</td>
             <td>30/04/2026</td>
             <td>Depósito</td>
-            <td>Calibrar impresora para nuevas medidas de etiquetas SKU.</td>
+            <td>Calibrar impresora para etiquetas SKU.</td>
             <td>Hardware</td>
             <td><span class="badge warn">🟡 En análisis</span></td>
             <td><span class="badge alta">Alta</span></td>
@@ -296,7 +325,7 @@
             <td>TI-0010</td>
             <td>06/05/2026</td>
             <td>Ventas</td>
-            <td>Automatizar mecanismo de carga de datos Looker Studio.</td>
+            <td>Automatizar carga de datos Looker Studio.</td>
             <td>Otro</td>
             <td><span class="badge warn">🟡 En análisis</span></td>
             <td><span class="badge alta">Alta</span></td>
@@ -305,7 +334,7 @@
             <td>TI-0011</td>
             <td>06/05/2026</td>
             <td>Ventas</td>
-            <td>Lista de precios Odoo ineficiente (exceso de columnas).</td>
+            <td>Lista de precios Odoo ineficiente.</td>
             <td>Odoo</td>
             <td><span class="badge warn">🟡 En análisis</span></td>
             <td><span class="badge alta">Alta</span></td>
@@ -326,7 +355,6 @@
   </div>
 
   <script>
-    // Registro global del plugin para poder usarlo en Chart.js
     Chart.register(ChartDataLabels);
 
     const baseOptions = {
@@ -335,7 +363,7 @@
       animation: false,
       plugins: {
         legend: { labels: { color: '#e5e7eb' }, position: 'bottom' },
-        datalabels: { display: false } // Lo apagamos por defecto para que no salga en barras
+        datalabels: { display: false }
       },
       scales: {
         x: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(148,163,184,.1)' } },
@@ -343,13 +371,12 @@
       }
     };
 
-    // 1. Estado del Portafolio
     new Chart(document.getElementById('estadoChart'), {
       type: 'bar',
       data: {
         labels: ['Finalizado', 'Bloqueado', 'En Proceso', 'Pendiente', 'Cancelado'],
         datasets: [{
-          label: 'Cantidad de Proyectos',
+          label: 'Proyectos',
           data: [34, 13, 9, 3, 1],
           backgroundColor: ['#34d399', '#f87171', '#fbbf24', '#38bdf8', '#64748b'],
           borderRadius: 4
@@ -358,7 +385,6 @@
       options: { ...baseOptions, scales: { ...baseOptions.scales, y: { ...baseOptions.scales.y, max: 40 } } }
     });
 
-    // 2. Distribución por Prioridad (CON PORCENTAJES)
     new Chart(document.getElementById('prioridadChart'), {
       type: 'doughnut',
       data: {
@@ -374,7 +400,6 @@
         maintainAspectRatio: false,
         plugins: { 
           legend: { position: 'right', labels: { color: '#e5e7eb' } },
-          // Configuración del plugin DataLabels para mostrar el %
           datalabels: {
             display: true,
             color: '#ffffff',
@@ -382,11 +407,9 @@
             formatter: (value, context) => {
               const dataset = context.chart.data.datasets[0].data;
               const total = dataset.reduce((acc, val) => acc + val, 0);
-              const percentage = Math.round((value / total) * 100) + '%';
-              return percentage;
+              return Math.round((value / total) * 100) + '%';
             }
           },
-          // Mejora del tooltip para mostrar también el % al pasar el ratón
           tooltip: {
             callbacks: {
               label: function(context) {
