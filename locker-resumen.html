@@ -25,6 +25,7 @@
       color: var(--text);
       background: radial-gradient(circle at top right, #1d2d49 0%, var(--bg) 45%, #05080f 100%);
       min-height: 100vh;
+      padding-bottom: 40px;
     }
     .wrap { max-width: 1280px; margin: 0 auto; padding: 18px; }
     .top {
@@ -47,11 +48,11 @@
     .kpi .value.ok { color: var(--ok); }
     .kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .5px; margin-top: 4px;}
 
-    /* Nuevo Layout principal */
     .main-layout {
       display: grid;
-      grid-template-columns: 3fr 1fr; /* Columna Izq 75% | Columna Der 25% */
+      grid-template-columns: 3fr 1fr;
       gap: 12px;
+      margin-bottom: 24px;
     }
     .left-col { display: flex; flex-direction: column; gap: 12px; }
     .right-col { display: flex; flex-direction: column; }
@@ -70,26 +71,42 @@
     .chart-box { position: relative; height: 280px; }
 
     table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
-    th, td { border: 1px solid var(--border); padding: 10px 8px; text-align: left; }
-    th { background: rgba(56, 189, 248, 0.12); font-weight: 600; color: var(--accent); }
+    th, td { border: 1px solid var(--border); padding: 10px 8px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05);}
+    th { background: rgba(56, 189, 248, 0.12); font-weight: 600; color: var(--accent); border-bottom: none;}
     tr:nth-child(even) { background: rgba(255,255,255,0.02); }
     
-    /* Ajustes tabla derecha (Licencias) */
     .table-licencias th, .table-licencias td { padding: 10px 6px; font-size: 12px; text-align: center; }
     .table-licencias th:first-child, .table-licencias td:first-child { text-align: left; font-weight: 500; }
     .text-ok { color: var(--ok); font-weight: bold;}
     .text-muted { color: var(--muted); }
 
-    .badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+    .badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; white-space: nowrap;}
     .badge.critica { background: rgba(248, 113, 113, 0.2); color: #fca5a5; }
     .badge.alta { background: rgba(251, 191, 36, 0.2); color: #fcd34d; }
     .badge.media { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; }
     .badge.proceso { background: rgba(56, 189, 248, 0.2); color: #7dd3fc; }
+    .badge.proveedor { background: rgba(167, 139, 250, 0.2); color: #c4b5fd; }
+
+    .section-title {
+      font-size: 20px;
+      margin: 24px 0 12px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .kpis-small {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px;
+    }
+    .kpis-small .kpi { padding: 8px 12px; display: flex; align-items: center; justify-content: space-between;}
+    .kpis-small .kpi .label { margin: 0; }
+    .kpis-small .kpi .value { font-size: 20px; }
 
     @media (max-width: 1024px) {
       .main-layout { grid-template-columns: 1fr; }
       .grid-charts { grid-template-columns: 1fr; }
       .kpis { grid-template-columns: repeat(3, 1fr); }
+      .kpis-small { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
       .kpis { grid-template-columns: repeat(2, 1fr); }
@@ -106,15 +123,14 @@
     </div>
 
     <section class="kpis">
-      <div class="kpi"><div class="value">60</div><div class="label">Total Tareas</div></div>
-      <div class="kpi"><div class="value ok">34</div><div class="label">Finalizadas</div></div>
-      <div class="kpi"><div class="value danger">13</div><div class="label">Bloqueadas</div></div>
+      <div class="kpi"><div class="value">60</div><div class="label">Total Proyectos</div></div>
+      <div class="kpi"><div class="value ok">34</div><div class="label">Finalizados</div></div>
+      <div class="kpi"><div class="value danger">13</div><div class="label">Bloqueados</div></div>
       <div class="kpi"><div class="value warn">9</div><div class="label">En Proceso</div></div>
-      <div class="kpi"><div class="value danger">10</div><div class="label">Críticas</div></div>
+      <div class="kpi"><div class="value danger">10</div><div class="label">Críticos</div></div>
     </section>
 
     <section class="main-layout">
-      
       <div class="left-col">
         <div class="grid-charts">
           <article class="card">
@@ -129,45 +145,45 @@
         </div>
 
         <article class="card">
-          <h2>Tareas en Proceso / Pendientes</h2>
-          <div class="note">Detalle de las tareas activas actualmente en gestión por el equipo de IT.</div>
+          <h2>Proyectos en Proceso / Pendientes</h2>
+          <div class="note">Detalle de las iniciativas principales activas en gestión por IT.</div>
           <table>
             <thead>
-              <tr><th>N°</th><th>Tarea / Actividad</th><th>Responsable / Asociado</th><th>Estado</th><th>Prioridad</th></tr>
+              <tr><th>N°</th><th>Tarea / Actividad</th><th>Responsable</th><th>Estado</th><th>Prioridad</th></tr>
             </thead>
             <tbody>
               <tr>
                 <td>60</td>
-                <td>Ver Arreglo del Servidor del SISTEMA HANSA</td>
-                <td>Facundo Colman / Guido</td>
+                <td>Arreglo del Servidor del SISTEMA HANSA</td>
+                <td>F. Colman / Guido</td>
                 <td><span class="badge proceso">🟡 En Proceso</span></td>
                 <td><span class="badge critica">1. Crítica</span></td>
               </tr>
               <tr>
                 <td>53</td>
-                <td>Looker Studio | 2026 ventas C44 / Mejorar Mecánica</td>
-                <td>Facundo Colman / Lucas</td>
+                <td>Looker Studio | 2026 ventas C44 / Mecánica</td>
+                <td>F. Colman / Lucas</td>
                 <td><span class="badge proceso">🟡 En Proceso</span></td>
                 <td><span class="badge alta">2. Alta</span></td>
               </tr>
               <tr>
                 <td>55</td>
                 <td>Lista de Precio Automatizada</td>
-                <td>Facundo Colman</td>
+                <td>F. Colman</td>
                 <td><span class="badge proceso">🟡 En Proceso</span></td>
                 <td><span class="badge alta">2. Alta</span></td>
               </tr>
               <tr>
                 <td>56</td>
                 <td>Locker - Informe de VENTAS</td>
-                <td>Facundo Colman / Lucas</td>
+                <td>F. Colman / Lucas</td>
                 <td><span class="badge proceso">🟡 En Proceso</span></td>
                 <td><span class="badge alta">2. Alta</span></td>
               </tr>
               <tr>
                 <td>54</td>
                 <td>Planilla de control con TUPI</td>
-                <td>Facundo Colman / Jhamyl</td>
+                <td>F. Colman / Jhamyl</td>
                 <td><span class="badge proceso">🟡 En Proceso</span></td>
                 <td><span class="badge media">3. Media</span></td>
               </tr>
@@ -219,8 +235,100 @@
           </table>
         </article>
       </div>
-
     </section>
+
+    <h2 class="section-title">Centro de Soporte (Helpdesk Interno)</h2>
+    
+    <div class="kpis-small">
+      <div class="kpi"><div class="label">Total Tickets</div><div class="value">12</div></div>
+      <div class="kpi"><div class="label">Resueltos</div><div class="value ok">5</div></div>
+      <div class="kpi"><div class="label">Activos / Pendientes</div><div class="value warn">7</div></div>
+      <div class="kpi"><div class="label">Incidencias Críticas</div><div class="value danger">3</div></div>
+    </div>
+
+    <article class="card">
+      <h2>Tickets Activos (Requieren Atención)</h2>
+      <div class="note">Listado de solicitudes e incidentes reportados por los usuarios que se encuentran en proceso de solución.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Ticket</th>
+            <th>Fecha</th>
+            <th>Área</th>
+            <th>Solicitud</th>
+            <th>Categoría</th>
+            <th>Estado</th>
+            <th>Prioridad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TI-0010</td>
+            <td>27/04/2026</td>
+            <td>Administración</td>
+            <td>Al imprimir recibos no muestra todos los datos.</td>
+            <td>Odoo</td>
+            <td><span class="badge proveedor">🟣 En espera de prov.</span></td>
+            <td><span class="badge critica">Crítica</span></td>
+          </tr>
+          <tr>
+            <td>TI-0011</td>
+            <td>27/04/2026</td>
+            <td>Administración</td>
+            <td>Entregas sin habilitación automática en salón.</td>
+            <td>Odoo</td>
+            <td><span class="badge warn">🟡 En análisis</span></td>
+            <td><span class="badge critica">Crítica</span></td>
+          </tr>
+          <tr>
+            <td>TI-0010</td>
+            <td>06/05/2026</td>
+            <td>Ventas</td>
+            <td>Automatizar carga de datos Looker Studio Ventas.</td>
+            <td>Otro</td>
+            <td><span class="badge warn">🟡 En análisis</span></td>
+            <td><span class="badge alta">Alta</span></td>
+          </tr>
+          <tr>
+            <td>TI-0011</td>
+            <td>06/05/2026</td>
+            <td>Ventas</td>
+            <td>Lista de precios Odoo ineficiente (muchas cols).</td>
+            <td>Odoo</td>
+            <td><span class="badge warn">🟡 En análisis</span></td>
+            <td><span class="badge alta">Alta</span></td>
+          </tr>
+          <tr>
+            <td>TI-0012</td>
+            <td>06/05/2026</td>
+            <td>Ventas</td>
+            <td>Informe de ventas a un click (Looker u Odoo).</td>
+            <td>Odoo</td>
+            <td><span class="badge warn">🟡 En análisis</span></td>
+            <td><span class="badge alta">Alta</span></td>
+          </tr>
+          <tr>
+            <td>TI-0009</td>
+            <td>24/04/2026</td>
+            <td>Marketing</td>
+            <td>Protección cuenta Instagram Vitalica (Spam).</td>
+            <td>Otro</td>
+            <td><span class="badge warn">🟡 En análisis</span></td>
+            <td><span class="badge alta">Alta</span></td>
+          </tr>
+          <tr>
+            <td>TI-0009</td>
+            <td>30/04/2026</td>
+            <td>Depósito</td>
+            <td>Calibrar impresora para nuevas etiquetas SKU.</td>
+            <td>Hardware</td>
+            <td><span class="badge warn">🟡 En análisis</span></td>
+            <td><span class="badge alta">Alta</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+
   </div>
 
   <script>
@@ -243,7 +351,7 @@
       data: {
         labels: ['Finalizado', 'Bloqueado', 'En Proceso', 'Pendiente', 'Cancelado'],
         datasets: [{
-          label: 'Cantidad de Tareas',
+          label: 'Cantidad de Proyectos',
           data: [34, 13, 9, 3, 1],
           backgroundColor: ['#34d399', '#f87171', '#fbbf24', '#38bdf8', '#64748b'],
           borderRadius: 4
