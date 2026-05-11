@@ -33,13 +33,10 @@
     }
     h1 { margin: 0; font-size: 28px; }
     .sub { color: var(--muted); margin-top: 4px; font-size: 14px; }
-    .btn {
-      border: 1px solid var(--border); background: rgba(56,189,248,.1); color: var(--text);
-      border-radius: 8px; padding: 8px 10px; text-decoration: none; font-size: 13px; transition: 0.2s;
-    }
-    .btn:hover { background: rgba(56,189,248,.2); }
+    
+    /* Ajustado a 5 columnas para que quede centrado sin el de Odoo */
     .kpis {
-      display: grid; grid-template-columns: repeat(6, minmax(140px, 1fr)); gap: 10px; margin: 12px 0;
+      display: grid; grid-template-columns: repeat(5, minmax(140px, 1fr)); gap: 10px; margin: 12px 0;
     }
     .kpi {
       background: var(--panel-2); border: 1px solid var(--border); border-radius: 12px; padding: 12px;
@@ -90,7 +87,6 @@
         <h1>Dashboard Portafolio IT</h1>
         <div class="sub">Camping 44 S.A. / Vitalica · Resumen Ejecutivo · Corte: 11/05/2026</div>
       </div>
-      <a class="btn" href="#">Abrir presentación Reveal</a>
     </div>
 
     <section class="kpis">
@@ -99,7 +95,6 @@
       <div class="kpi"><div class="value danger">13</div><div class="label">Bloqueadas</div></div>
       <div class="kpi"><div class="value warn">9</div><div class="label">En Proceso</div></div>
       <div class="kpi"><div class="value danger">10</div><div class="label">Críticas</div></div>
-      <div class="kpi"><div class="value accent">42,5%</div><div class="label">Avance Odoo ERP</div></div>
     </section>
 
     <section class="grid">
