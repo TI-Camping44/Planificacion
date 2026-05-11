@@ -69,7 +69,8 @@
     tr:nth-child(even) { background: rgba(255,255,255,0.02); }
     .badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
     .badge.critica { background: rgba(248, 113, 113, 0.2); color: #fca5a5; }
-    .badge.bloqueado { background: rgba(251, 191, 36, 0.2); color: #fcd34d; }
+    .badge.alta { background: rgba(251, 191, 36, 0.2); color: #fcd34d; }
+    .badge.media { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; }
     .badge.proceso { background: rgba(56, 189, 248, 0.2); color: #7dd3fc; }
 
     @media (max-width: 980px) {
@@ -112,65 +113,48 @@
         <div class="chart-box"><canvas id="prioridadChart"></canvas></div>
       </article>
 
-      <article class="card">
-        <h2>Por Unidad de Negocio</h2>
-        <div class="chart-box"><canvas id="unidadChart"></canvas></div>
-      </article>
-      
-      <article class="card">
-        <h2>Avance Proyectos Clave en Curso (%)</h2>
-        <div class="chart-box"><canvas id="proyectosChart"></canvas></div>
-      </article>
-
       <article class="card full">
-        <h2>Atención Requerida: Tareas Críticas y Bloqueadas</h2>
-        <div class="note">Selección de tareas prioritarias que requieren gestión o desbloqueo por parte del liderazgo.</div>
+        <h2>Tareas en Proceso / Pendientes</h2>
+        <div class="note">Detalle de las tareas activas actualmente en gestión por el equipo de IT.</div>
         <table>
           <thead>
             <tr><th>N°</th><th>Tarea / Actividad</th><th>Responsable / Asociado</th><th>Estado</th><th>Prioridad</th></tr>
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
-              <td>Implementación y Optimización Odoo ERP</td>
-              <td>Facundo Colman / SATI</td>
-              <td><span class="badge bloqueado">🟠 Bloqueado</span></td>
-              <td><span class="badge critica">1. Crítica</span></td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Política de contraseñas corporativas</td>
-              <td>Facundo Colman / Calidad</td>
-              <td><span class="badge bloqueado">🟠 Bloqueado</span></td>
-              <td><span class="badge critica">1. Crítica</span></td>
-            </tr>
-            <tr>
-              <td>23</td>
-              <td>Control obligatorio facturación material controlado</td>
-              <td>Facundo Colman</td>
-              <td><span class="badge bloqueado">🟠 Bloqueado</span></td>
-              <td><span class="badge critica">1. Crítica</span></td>
-            </tr>
-            <tr>
-              <td>30</td>
-              <td>Arreglo valorización de Stock en Odoo</td>
-              <td>Facundo Colman / Jesus (SATI)</td>
-              <td><span class="badge proceso">🟡 En Proceso</span></td>
-              <td><span class="badge critica">1. Crítica</span></td>
-            </tr>
-            <tr>
               <td>60</td>
-              <td>Arreglo Servidor SISTEMA HANSA</td>
+              <td>Ver Arreglo del Servidor del SISTEMA HANSA</td>
               <td>Facundo Colman / Guido</td>
               <td><span class="badge proceso">🟡 En Proceso</span></td>
               <td><span class="badge critica">1. Crítica</span></td>
             </tr>
             <tr>
-              <td>21</td>
-              <td>Generación de Código de Barras en productos</td>
-              <td>Facundo Colman / Guillermo</td>
-              <td><span class="badge bloqueado">🔴 Pendiente</span></td>
-              <td><span class="badge critica">1. Crítica</span></td>
+              <td>53</td>
+              <td>Looker Studio | 2026 ventas C44 / Mejorar Mecánica</td>
+              <td>Facundo Colman / Lucas</td>
+              <td><span class="badge proceso">🟡 En Proceso</span></td>
+              <td><span class="badge alta">2. Alta</span></td>
+            </tr>
+            <tr>
+              <td>55</td>
+              <td>Lista de Precio Automatizada</td>
+              <td>Facundo Colman</td>
+              <td><span class="badge proceso">🟡 En Proceso</span></td>
+              <td><span class="badge alta">2. Alta</span></td>
+            </tr>
+            <tr>
+              <td>56</td>
+              <td>Locker - Informe de VENTAS</td>
+              <td>Facundo Colman / Lucas</td>
+              <td><span class="badge proceso">🟡 En Proceso</span></td>
+              <td><span class="badge alta">2. Alta</span></td>
+            </tr>
+            <tr>
+              <td>54</td>
+              <td>Planilla de control con TUPI</td>
+              <td>Facundo Colman / Jhamyl</td>
+              <td><span class="badge proceso">🟡 En Proceso</span></td>
+              <td><span class="badge media">3. Media</span></td>
             </tr>
           </tbody>
         </table>
@@ -223,43 +207,6 @@
         maintainAspectRatio: false,
         plugins: { legend: { position: 'right', labels: { color: '#e5e7eb' } } },
         cutout: '65%'
-      }
-    });
-
-    // 3. Unidad de Negocio
-    new Chart(document.getElementById('unidadChart'), {
-      type: 'bar',
-      data: {
-        labels: ['Camping 44', 'Vitalica', 'Ambos (Mixto)'],
-        datasets: [{ 
-          label: 'Cantidad', 
-          data: [46, 9, 5], 
-          backgroundColor: ['#38bdf8', '#34d399', '#a78bfa'],
-          borderRadius: 4
-        }]
-      },
-      options: { ...baseOptions, scales: { ...baseOptions.scales, y: { ...baseOptions.scales.y, max: 50 } } }
-    });
-
-    // 4. Avance Proyectos Clave (Gráfico Horizontal)
-    new Chart(document.getElementById('proyectosChart'), {
-      type: 'bar',
-      data: {
-        labels: ['Reemplazo Tech', 'Cableado Estr.', 'Servidor HANSA', 'Odoo ERP'],
-        datasets: [{ 
-          label: '% de Avance', 
-          data: [72.22, 66.44, 60.00, 42.51], 
-          backgroundColor: '#38bdf8',
-          borderRadius: 4
-        }]
-      },
-      options: { 
-        ...baseOptions, 
-        indexAxis: 'y', // Lo hace horizontal como barras de progreso
-        scales: { 
-          x: { ...baseOptions.scales.y, max: 100 }, 
-          y: { ...baseOptions.scales.x } 
-        } 
       }
     });
   </script>
