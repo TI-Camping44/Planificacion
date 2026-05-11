@@ -9,57 +9,59 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
   
   <style>
-    /* VARIABLES DE COLOR - PALETA CORPORATIVA REFINADA */
     :root {
-      --bg: #0b1320; /* Fondo ultra oscuro profundo */
-      --panel: #111c2e; /* Paneles con relieve sutil */
-      --panel-2: #0f1727; /* Contenedores de KPIs */
-      --text: #e5e7eb; /* Texto principal claro */
-      --muted: #93a3b8; /* Texto secundario apagado */
-      --accent: #38bdf8; /* Azul cyan vibrante corporativo */
+      --bg: #0b1320;
+      --panel: #111c2e;
+      --panel-2: #0f1727;
+      --text: #e5e7eb;
+      --muted: #93a3b8;
+      --accent: #38bdf8;
       --accent-glow: rgba(56, 189, 248, 0.35);
-      --ok: #34d399; /* Verde esmeralda para éxitos */
-      --warn: #fbbf24; /* Naranja ámbar para alertas */
-      --danger: #f87171; /* Rojo suave para críticas */
-      --border: rgba(148, 163, 184, 0.18); /* Bordes ultra sutiles */
+      --ok: #34d399;
+      --warn: #fbbf24;
+      --danger: #f87171;
+      --border: rgba(148, 163, 184, 0.18);
     }
-    
-    /* RESET BÁSICO Y TIPOGRAFÍA CORPORATIVA */
-    * { box-sizing: border-box; margin: 0; padding: 0;}
+    * { box-sizing: border-box; }
     body {
-      font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
       background: radial-gradient(circle at top right, #1d2d49 0%, var(--bg) 55%, #05080f 100%);
       min-height: 100vh;
-      padding-bottom: 50px; /* Spacing para pie de página */
+      padding-bottom: 40px;
     }
-    
-    /* CONTENEDOR PRINCIPAL REFINADO */
     .wrap { max-width: 1360px; margin: 0 auto; padding: 20px; }
     
-    /* CABECERA CORPORATIVA CON LOGO */
     .top {
-      display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap;
-      margin-bottom: 25px;
-      padding-bottom: 10px;
+      display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 20px;
       border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
     }
-    h1 { margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.5px; }
-    .company-logo { font-size: 20px; font-weight: bold; color: var(--text); }
-    .sub { color: var(--muted); margin-top: 5px; font-size: 15px; }
-    
-    /* BOTÓN PREMIM DE PRESENTACIÓN */
-    .btn {
-      border: 1px solid var(--border); background: rgba(56,189,248,.08); color: var(--accent);
-      border-radius: 10px; padding: 10px 14px; text-decoration: none; font-size: 14px; font-weight: 600;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    .company-logo { font-size: 18px; font-weight: bold; color: var(--text); }
+    h1 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+    .sub { color: var(--muted); margin-top: 4px; font-size: 14px; }
+
+    /* Alerta Crítica */
+    .alert-banner {
+      background: rgba(248, 113, 113, 0.15);
+      border: 1px solid var(--danger);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 4px 12px rgba(248, 113, 113, 0.1);
     }
-    .btn:hover { background: rgba(56,189,248,.18); box-shadow: 0 4px 6px var(--accent-glow); transform: translateY(-1px); }
+    .alert-icon { font-size: 24px; }
+    .alert-content b { color: var(--danger); display: block; margin-bottom: 4px; font-size: 15px; }
+    .alert-content p { margin: 0; font-size: 13.5px; line-height: 1.5; color: #fca5a5; }
     
-    /* SECCIÓN DE KPIs: DISEÑO RELEVADO Y ANIMADO */
+    /* KPIs Corporativos */
     .kpis {
-      display: grid; grid-template-columns: repeat(6, minmax(140px, 1fr)); gap: 12px; margin: 15px 0 25px;
+      display: grid; grid-template-columns: repeat(5, minmax(140px, 1fr)); gap: 12px; margin: 15px 0 25px;
     }
     .kpi {
       background: var(--panel-2); border: 1px solid var(--border); border-radius: 16px; padding: 16px;
@@ -67,56 +69,69 @@
       transition: box-shadow 0.3s ease;
     }
     .kpi:hover { box-shadow: 0 6px 12px var(--accent-glow); }
-    .kpi .value { font-size: 30px; font-weight: 800; color: var(--text); }
-    .kpi .value.ok { color: var(--ok); }
-    
-    /* ALERTA VISUAL PARA BLOQUEADOS - Blink sutil */
-    .kpi .value.danger { color: var(--danger); animation: blink-red 2s infinite; }
-    @keyframes blink-red { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
-    
+    .kpi .value { font-size: 28px; font-weight: 800; }
+    .kpi .value.danger { color: var(--danger); }
     .kpi .value.warn { color: var(--warn); }
-    .kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-top: 6px;}
+    .kpi .value.ok { color: var(--ok); }
+    .kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-top: 6px;}
 
-    /* LAYOUT PRINCIPAL REFINADO CON DOS COLUMNAS */
-    .grid {
+    /* Layout 75% / 25% */
+    .main-layout {
+      display: grid; grid-template-columns: 3fr 1fr; gap: 15px; margin-bottom: 24px;
+    }
+    .left-col { display: flex; flex-direction: column; gap: 15px; }
+    .right-col { display: flex; flex-direction: column; }
+    
+    .grid-charts {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;
     }
-    
-    /* CARD CORPORATIVA: DISEÑO RELEVADO Y LIMPUIO */
+
+    /* Cards Corporativas */
     .card {
       background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 18px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
-    .card h2 { margin: 0 0 12px; font-size: 18px; color: var(--text); font-weight: 700; }
-    .note { color: var(--muted); font-size: 12px; margin-top: 10px; }
-    .chart-box { position: relative; height: 320px; }
+    .card.h-full { height: 100%; }
+    .card h2 { margin: 0 0 8px; font-size: 16px; font-weight: 700; color: var(--text); }
+    .note { color: var(--muted); font-size: 12px; margin-top: 4px; margin-bottom: 12px;}
+    .chart-box { position: relative; height: 280px; }
 
-    /* SECCIÓN PROYECTOS/RIESGOS */
-    .projects-summary { margin-top: 15px; }
-    .project-risk {
-      display: flex; justify-content: space-between; align-items: center; gap: 10px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-    .project-risk .proj-name { font-weight: 600; font-size: 14px; }
-    .project-risk .proj-risk { color: var(--danger); font-weight: 500; font-size: 12px;}
-
-    /* TABLA DE LICENCIAS REFINADA: DISEÑO LIMPUIO Y LEGIBLE */
-    table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 12px; }
-    th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    th { background: rgba(56, 189, 248, 0.08); font-weight: 700; color: var(--accent); }
-    tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+    /* Tablas Corporativas */
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 10px; }
+    th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.04);}
+    th { background: rgba(56, 189, 248, 0.08); font-weight: 700; color: var(--accent); border-bottom: none; border-radius: 4px;}
+    tr:hover td { background: rgba(255,255,255,0.02); }
     
-    /* INSIGNIAS DE ESTADO (BADGES) */
-    .badge { padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase;}
-    .badge.critica { background: rgba(248, 113, 113, 0.2); color: #fca5a5; }
-    .badge.bloqueado { background: rgba(251, 191, 36, 0.2); color: #fcd34d; }
-    .badge.proceso { background: rgba(56, 189, 248, 0.2); color: #7dd3fc; }
+    .table-licencias th, .table-licencias td { padding: 12px 8px; font-size: 13px; text-align: center; }
+    .table-licencias th:first-child, .table-licencias td:first-child { text-align: left; font-weight: 500; }
+    .text-ok { color: var(--ok); font-weight: bold;}
+    .text-muted { color: var(--muted); }
 
-    /* RESPONSIVIDAD CORPORATIVA */
+    /* Badges / Insignias */
+    .badge { padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; white-space: nowrap; text-transform: uppercase;}
+    .badge.critica { background: rgba(248, 113, 113, 0.2); color: #fca5a5; }
+    .badge.alta { background: rgba(251, 191, 36, 0.2); color: #fcd34d; }
+    .badge.media { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; }
+    .badge.proceso { background: rgba(56, 189, 248, 0.2); color: #7dd3fc; }
+    .badge.proveedor { background: rgba(167, 139, 250, 0.2); color: #c4b5fd; }
+
+    .section-title {
+      font-size: 20px; font-weight: 800; margin: 30px 0 15px; color: var(--text);
+      border-bottom: 1px solid var(--border); padding-bottom: 10px;
+    }
+
+    .kpis-small {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 15px;
+    }
+    .kpis-small .kpi { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;}
+    .kpis-small .kpi .label { margin: 0; font-size: 11px;}
+    .kpis-small .kpi .value { font-size: 22px; }
+
     @media (max-width: 1024px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .grid-charts { grid-template-columns: 1fr; }
       .kpis { grid-template-columns: repeat(3, 1fr); }
-      .grid { grid-template-columns: 1fr; }
+      .kpis-small { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
       .kpis { grid-template-columns: repeat(2, 1fr); }
@@ -131,82 +146,217 @@
         <h1>Dashboard Portafolio IT</h1>
         <div class="sub">Resumen Corporativo Semanal · Corte: 11/05/2026</div>
       </div>
-      <a class="btn" href="#">Abrir presentación Reveal</a>
+    </div>
+
+    <div class="alert-banner">
+      <div class="alert-icon">🚨</div>
+      <div class="alert-content">
+        <b>INCIDENCIA CRÍTICA: SISTEMA HANSA FUERA DE SERVICIO</b>
+        <p>Actualmente nos encontramos sin sistema. Durante la tormenta del 07 de mayo, un cortocircuito quemó los discos del servidor. Logramos recuperar el backup para montarlo en otro equipo, pero requerimos el instalador de nuestra versión específica. <strong>Ya estoy en comunicación directa con Hansa Internacional</strong> (quienes no operan los fines de semana) y espero poder restablecer el servicio en el transcurso del día de hoy.</p>
+      </div>
     </div>
 
     <section class="kpis">
       <div class="kpi"><div class="value">60</div><div class="label">Total Proyectos</div></div>
-      <div class="kpi"><div class="value ok">34</div><div class="label">✅ Finalizados</div></div>
-      <div class="kpi"><div class="value danger">13</div><div class="label">🟠 Tareas Bloqueadas</div></div>
-      <div class="kpi"><div class="value warn">9</div><div class="label">🟡 En Proceso</div></div>
-      <div class="kpi"><div class="value danger">10</div><div class="label">🔴 Tareas Críticas</div></div>
-      <div class="kpi"><div class="value accent">42,5%</div><div class="label">Avance Odoo ERP</div></div>
+      <div class="kpi"><div class="value ok">34</div><div class="label">Finalizados</div></div>
+      <div class="kpi"><div class="value danger">13</div><div class="label">Bloqueados</div></div>
+      <div class="kpi"><div class="value warn">9</div><div class="label">En Proceso</div></div>
+      <div class="kpi"><div class="value danger">10</div><div class="label">Críticos</div></div>
     </section>
 
-    <section class="grid">
-      <article class="card">
-        <h2>Portafolio IT por Estado</h2>
-        <div class="chart-box"><canvas id="estadoChart"></canvas></div>
-      </article>
-      
-      <article class="card">
-        <h2>Distribución por Prioridad (Total 60)</h2>
-        <div class="chart-box"><canvas id="prioridadChart"></canvas></div>
-      </article>
-
-      <article class="card">
-        <h2>Proyectos Clave y Riesgos Estratégicos</h2>
-        <div class="note">Detalle de iniciativas y puntos críticos de gestión.</div>
-        <div class="projects-summary">
-          <div class="project-risk">
-            <div><span class="proj-name">Odoo ERP ( Tarea 1)</span></div>
-            <div>Avance 42,51% · Roadmap activo · Pruebas internas</div>
-          </div>
-          <div class="project-risk">
-            <div><span class="proj-name">Inventario digital ( Tarea 6)</span></div>
-            <div>En Proceso · Relevamiento notebooks y equipos</div>
-          </div>
-          <div class="project-risk">
-            <div><span class="proj-name">Hansa Internacional ( Tarea 60)</span></div>
-            <div>En Proceso · Solución Servidor HANSA soporte int.</div>
-          </div>
-          <div class="project-risk">
-            <div><span class="proj-name proj-risk">RIESGO DE BLOQUEO (SATI)</span></div>
-            <div>Dependencia de terceros para avanzar (Odoo, Cuenta Ejecutivo)</div>
-          </div>
-          <div class="project-risk">
-            <div><span class="proj-name proj-risk">CRÍTICO: Cuenta Ejecutivo Clientel (SATI)</span></div>
-            <div>Pendiente desde 12/Feb</div>
-          </div>
+    <section class="main-layout">
+      <div class="left-col">
+        <div class="grid-charts">
+          <article class="card">
+            <h2>Estado del Portafolio IT</h2>
+            <div class="chart-box"><canvas id="estadoChart"></canvas></div>
+          </article>
+          
+          <article class="card">
+            <h2>Distribución por Prioridad</h2>
+            <div class="chart-box"><canvas id="prioridadChart"></canvas></div>
+          </article>
         </div>
-      </article>
 
-      <article class="card">
-        <h2>Uso de Licencias y Usuarios</h2>
-        <div class="chart-box"><canvas id="licenciasChart"></canvas></div>
-        <div class="note">Antivirus y HANSA reflejan datos parciales/operativos relevados al corte.</div>
-      </article>
+        <article class="card">
+          <h2>Proyectos en Proceso / Pendientes</h2>
+          <div class="note">Detalle de las iniciativas principales activas en gestión por IT.</div>
+          <table>
+            <thead>
+              <tr><th>N°</th><th>Tarea / Actividad</th><th>Responsable</th><th>Estado</th><th>Prioridad</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60</td>
+                <td>Arreglo del Servidor del SISTEMA HANSA</td>
+                <td>F. Colman / Guido</td>
+                <td><span class="badge proceso">🟡 En Proceso</span></td>
+                <td><span class="badge critica">1. Crítica</span></td>
+              </tr>
+              <tr>
+                <td>53</td>
+                <td>Looker Studio | 2026 ventas C44 / Mecánica</td>
+                <td>F. Colman / Lucas</td>
+                <td><span class="badge proceso">🟡 En Proceso</span></td>
+                <td><span class="badge alta">2. Alta</span></td>
+              </tr>
+              <tr>
+                <td>55</td>
+                <td>Lista de Precio Automatizada</td>
+                <td>F. Colman</td>
+                <td><span class="badge proceso">🟡 En Proceso</span></td>
+                <td><span class="badge alta">2. Alta</span></td>
+              </tr>
+              <tr>
+                <td>56</td>
+                <td>Locker - Informe de VENTAS</td>
+                <td>F. Colman / Lucas</td>
+                <td><span class="badge proceso">🟡 En Proceso</span></td>
+                <td><span class="badge alta">2. Alta</span></td>
+              </tr>
+              <tr>
+                <td>54</td>
+                <td>Planilla de control con TUPI</td>
+                <td>F. Colman / Jhamyl</td>
+                <td><span class="badge proceso">🟡 En Proceso</span></td>
+                <td><span class="badge media">3. Media</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
 
-      <article class="card">
-        <h2>Resumen de Licencias y Usuarios</h2>
-        <table class="licencias-table">
-          <thead>
-            <tr><th>Sistema</th><th>Total</th><th>Uso/Asignadas</th><th>Libres</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Antivirus</td><td>10 relevadas</td><td>7 en uso</td><td>3 libres</td></tr>
-            <tr><td>Google Workspace Standard</td><td>14</td><td>13 asignadas</td><td>1 disponible</td></tr>
-            <tr><td>Google Workspace Starter</td><td>36</td><td>34 asignadas</td><td>2 disponibles</td></tr>
-            <tr><td>Odoo</td><td>38 usuarios</td><td>36 activos</td><td>2 baja</td></tr>
-            <tr><td>HANSA</td><td>5 licencias</td><td>3 en uso</td><td>2 libres</td></tr>
-          </tbody>
-        </table>
-      </article>
+      <div class="right-col">
+        <article class="card h-full">
+          <h2>Uso de Licencias</h2>
+          <div class="note">Disponibilidad actual de activos.</div>
+          <table class="table-licencias">
+            <thead>
+              <tr><th>Sistema</th><th>Uso</th><th>Libres</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Antivirus</td>
+                <td class="text-ok">7</td>
+                <td class="text-muted">3</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>G.W. Standard</td>
+                <td class="text-ok">13</td>
+                <td class="text-muted">1</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>G.W. Starter</td>
+                <td class="text-ok">34</td>
+                <td class="text-muted">2</td>
+                <td>36</td>
+              </tr>
+              <tr>
+                <td>Odoo ERP</td>
+                <td class="text-ok">36</td>
+                <td class="text-muted">2</td>
+                <td>38</td>
+              </tr>
+              <tr>
+                <td>HANSA</td>
+                <td class="text-ok">3</td>
+                <td class="text-muted">2</td>
+                <td>5</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
     </section>
+
+    <h2 class="section-title">Centro de Soporte (Helpdesk Interno)</h2>
+    
+    <div class="kpis-small">
+      <div class="kpi"><div class="label">Total Tickets</div><div class="value">12</div></div>
+      <div class="kpi"><div class="label">Resueltos</div><div class="value ok">6</div></div>
+      <div class="kpi"><div class="label">Activos / Pendientes</div><div class="value warn">6</div></div>
+      <div class="kpi"><div class="label">Incidencias Críticas</div><div class="value danger">3</div></div>
+    </div>
+
+    <article class="card">
+      <h2>Tickets Activos (Requieren Atención)</h2>
+      <div class="note">Listado de solicitudes e incidentes reportados por los usuarios que se encuentran en proceso de solución.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Ticket</th>
+            <th>Fecha</th>
+            <th>Área</th>
+            <th>Solicitud</th>
+            <th>Categoría</th>
+            <th>Estado</th>
+            <th>Prioridad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TI-0010</td>
+            <td>27/04/2026</td>
+            <td>Administración</td>
+            <td>Al imprimir recibos NO muestra todos los datos.</td>
+            <td>Odoo</td>
+            <td><span class="badge proveedor">🟣 Espera de prov.</span></td>
+            <td><span class="badge critica">Crítica</span></td>
+          </tr>
+          <tr>
+            <td>TI-0011</td>
+            <td>27/04/2026</td>
+            <td>Administración</td>
+            <td>Entregas sin habilitación automática en salón.</td>
+            <td>Odoo</td>
+            <td><span class="badge proveedor">🟣 Espera de prov.</span></td>
+            <td><span class="badge critica">Crítica</span></td>
+          </tr>
+          <tr>
+            <td>TI-0009</td>
+            <td>30/04/2026</td>
+            <td>Depósito</td>
+            <td>Calibrar impresora para etiquetas SKU.</td>
+            <td>Hardware</td>
+            <td><span class="badge warn">🟡 En análisis</span></td>
+            <td><span class="badge alta">Alta</span></td>
+          </tr>
+          <tr>
+            <td>TI-0010</td>
+            <td>06/05/2026</td>
+            <td>Ventas</td>
+            <td>Automatizar carga de datos Looker Studio.</td>
+            <td>Otro</td>
+            <td><span class="badge warn">🟡 En análisis</span></td>
+            <td><span class="badge alta">Alta</span></td>
+          </tr>
+          <tr>
+            <td>TI-0011</td>
+            <td>06/05/2026</td>
+            <td>Ventas</td>
+            <td>Lista de precios Odoo ineficiente.</td>
+            <td>Odoo</td>
+            <td><span class="badge warn">🟡 En análisis</span></td>
+            <td><span class="badge alta">Alta</span></td>
+          </tr>
+          <tr>
+            <td>TI-0012</td>
+            <td>06/05/2026</td>
+            <td>Ventas</td>
+            <td>Automatizar informe de ventas a un click.</td>
+            <td>Odoo</td>
+            <td><span class="badge warn">🟡 En análisis</span></td>
+            <td><span class="badge alta">Alta</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+
   </div>
 
   <script>
-    // Registro global del plugin datalabels para dona
     Chart.register(ChartDataLabels);
 
     const baseOptions = {
@@ -215,72 +365,67 @@
       animation: false,
       plugins: {
         legend: { labels: { color: '#e5e7eb' }, position: 'bottom' },
-        datalabels: { display: false } // Desactivado por defecto para barras
+        datalabels: { display: false }
       },
       scales: {
-        x: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(148,163,184,.1)' } },
-        y: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(148,163,184,.1)' }, beginAtZero: true }
+        x: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(148,163,184,.1)' }, border: { display: false } },
+        y: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(148,163,184,.1)' }, border: { display: false }, beginAtZero: true }
       }
     };
 
-    // 1. Gráfico Estado (Conteo de tus 60 tareas)
     new Chart(document.getElementById('estadoChart'), {
       type: 'bar',
       data: {
-        labels: ['✅ Finalizado', '🟠 Bloqueado', '🟡 En Proceso', '🔴 Pendiente', '❌ Cancelado'],
+        labels: ['Finalizado', 'Bloqueado', 'En Proceso', 'Pendiente', 'Cancelado'],
         datasets: [{
-          label: 'Cantidad de Proyectos',
-          data: [34, 13, 9, 3, 1], // Conteo sintetizado de tus datos
-          backgroundColor: ['#34d399', '#fbbf24', '#38bdf8', '#f87171', '#64748b'],
-          borderRadius: 6 // Barras redondeadas corporativas
+          label: 'Proyectos',
+          data: [34, 13, 9, 3, 1],
+          backgroundColor: ['#34d399', '#f87171', '#fbbf24', '#38bdf8', '#64748b'],
+          borderRadius: 6
         }]
       },
       options: { ...baseOptions, scales: { ...baseOptions.scales, y: { ...baseOptions.scales.y, max: 40 } } }
     });
 
-    // 2. NUEVO Gráfico Dona Prioridades (Estilo Gerencial)
     new Chart(document.getElementById('prioridadChart'), {
       type: 'doughnut',
       data: {
-        labels: ['🔴 Crítica', '🟠 Alta', '🟡 Media', '⚪ Baja'],
+        labels: ['1. Crítica', '2. Alta', '3. Media', '4. Baja'],
         datasets: [{ 
-          data: [10, 16, 26, 8], // Conteo de prioridades
+          data: [10, 16, 26, 8], 
           backgroundColor: ['#f87171', '#fbbf24', '#34d399', '#64748b'],
-          borderWidth: 0 // Dona limpuia sin bordes
+          borderWidth: 0
         }]
       },
       options: { 
         responsive: true, 
+        maintainAspectRatio: false,
         plugins: { 
           legend: { position: 'right', labels: { color: '#e5e7eb' } },
-          // Plugin datalabels para mostrar porcentaje directo en dona
           datalabels: {
             display: true,
-            color: '#fff',
+            color: '#ffffff',
             font: { weight: 'bold', size: 14 },
             formatter: (value, context) => {
               const dataset = context.chart.data.datasets[0].data;
               const total = dataset.reduce((acc, val) => acc + val, 0);
-              const percentage = Math.round((value / total) * 100) + '%';
-              return percentage;
+              return Math.round((value / total) * 100) + '%';
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const dataset = context.dataset.data;
+                const total = dataset.reduce((acc, val) => acc + val, 0);
+                const value = context.parsed;
+                const percentage = Math.round((value / total) * 100) + '%';
+                return ` ${context.label}: ${value} (${percentage})`;
+              }
             }
           }
         },
-        cutout: '65%' // Dona delgada corporativa
+        cutout: '65%'
       }
-    });
-
-    // 3. Gráfico Licencias (Existente refinado)
-    new Chart(document.getElementById('licenciasChart'), {
-      type: 'bar',
-      data: {
-        labels: ['Antivirus', 'GWS Std', 'GWS Starter', 'Odoo Activos', 'HANSA'],
-        datasets: [
-          { label: 'Total relevado', data: [10, 14, 36, 38, 5], backgroundColor: '#334155', borderRadius: 4 },
-          { label: 'En uso/asignadas', data: [7, 13, 34, 36, 3], backgroundColor: '#38bdf8', borderRadius: 4 }
-        ]
-      },
-      options: { ...baseOptions, scales: { ...baseOptions.scales, y: { ...baseOptions.scales.y, max: 45 } } }
     });
   </script>
 </body>
