@@ -4,7 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard IT - Portafolio de Proyectos | Camping 44</title>
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+  
   <style>
     :root {
       --bg: #0b1320;
@@ -323,12 +326,16 @@
   </div>
 
   <script>
+    // Registro global del plugin para poder usarlo en Chart.js
+    Chart.register(ChartDataLabels);
+
     const baseOptions = {
       responsive: true,
       maintainAspectRatio: false,
       animation: false,
       plugins: {
-        legend: { labels: { color: '#e5e7eb' }, position: 'bottom' }
+        legend: { labels: { color: '#e5e7eb' }, position: 'bottom' },
+        datalabels: { display: false } // Lo apagamos por defecto para que no salga en barras
       },
       scales: {
         x: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(148,163,184,.1)' } },
@@ -351,7 +358,7 @@
       options: { ...baseOptions, scales: { ...baseOptions.scales, y: { ...baseOptions.scales.y, max: 40 } } }
     });
 
-    // 2. Distribución por Prioridad
+    // 2. Distribución por Prioridad (CON PORCENTAJES)
     new Chart(document.getElementById('prioridadChart'), {
       type: 'doughnut',
       data: {
@@ -365,8 +372,34 @@
       options: { 
         responsive: true, 
         maintainAspectRatio: false,
-        plugins: { legend: { position: 'right', labels: { color: '#e5e7eb' } } },
-        cutout: '65%'
+        plugins: { 
+          legend: { position: 'right', labels: { color: '#e5e7eb' } },
+          // Configuración del plugin DataLabels para mostrar el %
+          datalabels: {
+            display: true,
+            color: '#ffffff',
+            font: { weight: 'bold', size: 14 },
+            formatter: (value, context) => {
+              const dataset = context.chart.data.datasets[0].data;
+              const total = dataset.reduce((acc, val) => acc + val, 0);
+              const percentage = Math.round((value / total) * 100) + '%';
+              return percentage;
+            }
+          },
+          // Mejora del tooltip para mostrar también el % al pasar el ratón
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const dataset = context.dataset.data;
+                const total = dataset.reduce((acc, val) => acc + val, 0);
+                const value = context.parsed;
+                const percentage = Math.round((value / total) * 100) + '%';
+                return ` ${context.label}: ${value} (${percentage})`;
+              }
+            }
+          }
+        },
+        cutout: '60%'
       }
     });
   </script>
