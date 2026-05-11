@@ -34,7 +34,6 @@
     h1 { margin: 0; font-size: 28px; }
     .sub { color: var(--muted); margin-top: 4px; font-size: 14px; }
     
-    /* Ajustado a 5 columnas para que quede centrado sin el de Odoo */
     .kpis {
       display: grid; grid-template-columns: repeat(5, minmax(140px, 1fr)); gap: 10px; margin: 12px 0;
     }
@@ -48,32 +47,49 @@
     .kpi .value.ok { color: var(--ok); }
     .kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .5px; margin-top: 4px;}
 
-    .grid {
+    /* Nuevo Layout principal */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 3fr 1fr; /* Columna Izq 75% | Columna Der 25% */
+      gap: 12px;
+    }
+    .left-col { display: flex; flex-direction: column; gap: 12px; }
+    .right-col { display: flex; flex-direction: column; }
+    
+    .grid-charts {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
     }
+
     .card {
       background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 14px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    .card.full { grid-column: span 2; }
+    .card.h-full { height: 100%; }
     .card h2 { margin: 0 0 8px; font-size: 16px; color: var(--text); }
-    .note { color: var(--muted); font-size: 12px; margin-top: 8px; }
-    .chart-box { position: relative; height: 300px; }
+    .note { color: var(--muted); font-size: 12px; margin-top: 4px; margin-bottom: 8px;}
+    .chart-box { position: relative; height: 280px; }
 
     table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
     th, td { border: 1px solid var(--border); padding: 10px 8px; text-align: left; }
     th { background: rgba(56, 189, 248, 0.12); font-weight: 600; color: var(--accent); }
     tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+    
+    /* Ajustes tabla derecha (Licencias) */
+    .table-licencias th, .table-licencias td { padding: 10px 6px; font-size: 12px; text-align: center; }
+    .table-licencias th:first-child, .table-licencias td:first-child { text-align: left; font-weight: 500; }
+    .text-ok { color: var(--ok); font-weight: bold;}
+    .text-muted { color: var(--muted); }
+
     .badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
     .badge.critica { background: rgba(248, 113, 113, 0.2); color: #fca5a5; }
     .badge.alta { background: rgba(251, 191, 36, 0.2); color: #fcd34d; }
     .badge.media { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; }
     .badge.proceso { background: rgba(56, 189, 248, 0.2); color: #7dd3fc; }
 
-    @media (max-width: 980px) {
+    @media (max-width: 1024px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .grid-charts { grid-template-columns: 1fr; }
       .kpis { grid-template-columns: repeat(3, 1fr); }
-      .grid { grid-template-columns: 1fr; }
-      .card.full { grid-column: span 1; }
     }
     @media (max-width: 600px) {
       .kpis { grid-template-columns: repeat(2, 1fr); }
@@ -97,63 +113,113 @@
       <div class="kpi"><div class="value danger">10</div><div class="label">Críticas</div></div>
     </section>
 
-    <section class="grid">
-      <article class="card">
-        <h2>Estado del Portafolio IT</h2>
-        <div class="chart-box"><canvas id="estadoChart"></canvas></div>
-      </article>
+    <section class="main-layout">
       
-      <article class="card">
-        <h2>Distribución por Prioridad</h2>
-        <div class="chart-box"><canvas id="prioridadChart"></canvas></div>
-      </article>
+      <div class="left-col">
+        <div class="grid-charts">
+          <article class="card">
+            <h2>Estado del Portafolio IT</h2>
+            <div class="chart-box"><canvas id="estadoChart"></canvas></div>
+          </article>
+          
+          <article class="card">
+            <h2>Distribución por Prioridad</h2>
+            <div class="chart-box"><canvas id="prioridadChart"></canvas></div>
+          </article>
+        </div>
 
-      <article class="card full">
-        <h2>Tareas en Proceso / Pendientes</h2>
-        <div class="note">Detalle de las tareas activas actualmente en gestión por el equipo de IT.</div>
-        <table>
-          <thead>
-            <tr><th>N°</th><th>Tarea / Actividad</th><th>Responsable / Asociado</th><th>Estado</th><th>Prioridad</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>60</td>
-              <td>Ver Arreglo del Servidor del SISTEMA HANSA</td>
-              <td>Facundo Colman / Guido</td>
-              <td><span class="badge proceso">🟡 En Proceso</span></td>
-              <td><span class="badge critica">1. Crítica</span></td>
-            </tr>
-            <tr>
-              <td>53</td>
-              <td>Looker Studio | 2026 ventas C44 / Mejorar Mecánica</td>
-              <td>Facundo Colman / Lucas</td>
-              <td><span class="badge proceso">🟡 En Proceso</span></td>
-              <td><span class="badge alta">2. Alta</span></td>
-            </tr>
-            <tr>
-              <td>55</td>
-              <td>Lista de Precio Automatizada</td>
-              <td>Facundo Colman</td>
-              <td><span class="badge proceso">🟡 En Proceso</span></td>
-              <td><span class="badge alta">2. Alta</span></td>
-            </tr>
-            <tr>
-              <td>56</td>
-              <td>Locker - Informe de VENTAS</td>
-              <td>Facundo Colman / Lucas</td>
-              <td><span class="badge proceso">🟡 En Proceso</span></td>
-              <td><span class="badge alta">2. Alta</span></td>
-            </tr>
-            <tr>
-              <td>54</td>
-              <td>Planilla de control con TUPI</td>
-              <td>Facundo Colman / Jhamyl</td>
-              <td><span class="badge proceso">🟡 En Proceso</span></td>
-              <td><span class="badge media">3. Media</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
+        <article class="card">
+          <h2>Tareas en Proceso / Pendientes</h2>
+          <div class="note">Detalle de las tareas activas actualmente en gestión por el equipo de IT.</div>
+          <table>
+            <thead>
+              <tr><th>N°</th><th>Tarea / Actividad</th><th>Responsable / Asociado</th><th>Estado</th><th>Prioridad</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>60</td>
+                <td>Ver Arreglo del Servidor del SISTEMA HANSA</td>
+                <td>Facundo Colman / Guido</td>
+                <td><span class="badge proceso">🟡 En Proceso</span></td>
+                <td><span class="badge critica">1. Crítica</span></td>
+              </tr>
+              <tr>
+                <td>53</td>
+                <td>Looker Studio | 2026 ventas C44 / Mejorar Mecánica</td>
+                <td>Facundo Colman / Lucas</td>
+                <td><span class="badge proceso">🟡 En Proceso</span></td>
+                <td><span class="badge alta">2. Alta</span></td>
+              </tr>
+              <tr>
+                <td>55</td>
+                <td>Lista de Precio Automatizada</td>
+                <td>Facundo Colman</td>
+                <td><span class="badge proceso">🟡 En Proceso</span></td>
+                <td><span class="badge alta">2. Alta</span></td>
+              </tr>
+              <tr>
+                <td>56</td>
+                <td>Locker - Informe de VENTAS</td>
+                <td>Facundo Colman / Lucas</td>
+                <td><span class="badge proceso">🟡 En Proceso</span></td>
+                <td><span class="badge alta">2. Alta</span></td>
+              </tr>
+              <tr>
+                <td>54</td>
+                <td>Planilla de control con TUPI</td>
+                <td>Facundo Colman / Jhamyl</td>
+                <td><span class="badge proceso">🟡 En Proceso</span></td>
+                <td><span class="badge media">3. Media</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
+
+      <div class="right-col">
+        <article class="card h-full">
+          <h2>Uso de Licencias</h2>
+          <div class="note">Disponibilidad actual de activos.</div>
+          <table class="table-licencias">
+            <thead>
+              <tr><th>Sistema</th><th>Uso</th><th>Libres</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Antivirus</td>
+                <td class="text-ok">7</td>
+                <td class="text-muted">3</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>G.W. Standard</td>
+                <td class="text-ok">13</td>
+                <td class="text-muted">1</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>G.W. Starter</td>
+                <td class="text-ok">34</td>
+                <td class="text-muted">2</td>
+                <td>36</td>
+              </tr>
+              <tr>
+                <td>Odoo ERP</td>
+                <td class="text-ok">36</td>
+                <td class="text-muted">2</td>
+                <td>38</td>
+              </tr>
+              <tr>
+                <td>HANSA</td>
+                <td class="text-ok">3</td>
+                <td class="text-muted">2</td>
+                <td>5</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
+
     </section>
   </div>
 
